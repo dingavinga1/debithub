@@ -50,7 +50,6 @@ export default function Notifications({navigation}){
         const subscriber=await firestore()
         .collection('Admin').doc('Notifications').get().then(doc=>{
             const data=doc.data();
-            //console.log(data.notifications);
             const length=data.notifications.length;
             let j=0;
             for(let i=0; i<length; i++){
@@ -121,7 +120,6 @@ export default function Notifications({navigation}){
                         renderItem={({item})=>
                             {
                                 if(!item.hasOwnProperty('question')){
-                                    console.log(item);
                                     return(
                                         <View style={[styles().item, {width:'100%'}]}>
                                             <Text style={[styles().text, {fontWeight:'normal'}]}>{item.data}</Text>
