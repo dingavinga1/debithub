@@ -174,7 +174,10 @@ export default function User({navigation}){
                     </TouchableOpacity>
                 </View>
                 <View style={styles().row}>
-                    <TouchableOpacity style={styles().btn}>
+                    <TouchableOpacity 
+                        style={styles().btn}
+                        onPress={()=>{if(!loading)navigation.navigate('Statement')}}
+                    >
                        <Image source={require('../assets/bank-statement.png')} style={{width:50,height:60, opacity:0.8}}/>
                        <Text style={[styles().text, {textAlign:'center', paddingTop:10}]}>Account Statement</Text>
                     </TouchableOpacity>

@@ -11,6 +11,7 @@ import User from './screens/user';
 import Faq from './screens/faq';
 import Contact from './screens/contact';
 import Notifications from './screens/notifications';
+import Statement from './screens/statement';
 
 const Stack=createNativeStackNavigator();
 
@@ -126,6 +127,31 @@ export default function App(){
         }}/>
 
         <Stack.Screen name="Notifications" component={Notifications}  options={dark?{
+            headerRight:(props)=>(
+              <Image source={require('./assets/designing/logocard.png')}
+                style={{width:120, height:35}}
+              />
+            ),
+            headerTitleAlign:'left',
+            headerTintColor: '#fff',
+            headerStyle:{
+              //elevation:2,
+            backgroundColor:'#841851',
+            }
+          }:{
+            headerRight:(props)=>(
+              <Image source={require('./assets/designing/logocard.png')}
+                style={{width:120, height:35}}
+              />
+            ),
+            headerTitleAlign:'left',
+            headerTintColor: '#fff',
+            headerStyle:{
+            backgroundColor:'#801818',
+            }
+        }}/>
+
+        <Stack.Screen name="Statement" component={Statement}  options={dark?{
             headerRight:(props)=>(
               <Image source={require('./assets/designing/logocard.png')}
                 style={{width:120, height:35}}
