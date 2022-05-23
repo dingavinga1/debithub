@@ -78,8 +78,8 @@ export default function Login({navigation}){
         .then(userCredentials=>{
             const user=userCredentials.user;
             var check=email.substring(email.length-7);
-            if(check==='dbl.com'){
-                navigation.navigate('Admin');
+            if(check==='dhl.com'){
+                navigation.navigate('Dashboard');
             }
             else{
                 navigation.navigate('User');

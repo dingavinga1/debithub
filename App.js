@@ -12,6 +12,10 @@ import Faq from './screens/faq';
 import Contact from './screens/contact';
 import Notifications from './screens/notifications';
 import Statement from './screens/statement';
+import Dashboard from './Admin_Screens/Dashboard';
+import Admin_Notifications from './Admin_Screens/Admin_notifications';
+import Denyrights from './Admin_Screens/denyrights';
+import Settings from './Admin_Screens/settings';
 
 const Stack=createNativeStackNavigator();
 
@@ -175,6 +179,12 @@ export default function App(){
             backgroundColor:'#801818',
             }
         }}/>
+
+        <Stack.Screen name = "Dashboard" component={Dashboard} options={{headerShown: false}} />
+        <Stack.Screen name = "Deny Rights" component={Denyrights} options={{headerShown: false}} />
+        <Stack.Screen name = "Admin_Notifications" component={Admin_Notifications} options={{headerShown: false}} />
+        <Stack.Screen name = "Settings" component={Settings} options={{headerShown: false}} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
