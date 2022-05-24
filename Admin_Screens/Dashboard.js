@@ -39,9 +39,7 @@ export default function Dashboard({navigation}) {
     
   return(
       <View style={styles.container2}>
-        <LinearGradient colors={['#780206', '#061161' ]} style={{flex: 1, justifyContent: 'center'}}>
-            <Text style = {styles.header}> Admin Panel</Text>
-          
+        <LinearGradient colors={[ '#1e2127','#000','#1e2127']} style={{flex: 1, justifyContent: 'center'}}>          
               <View style={{flex: 8, justifyContent: 'center'}}>
                 
                 <View style={{flex: 4, justifyContent: 'center'}}>
@@ -90,21 +88,30 @@ export default function Dashboard({navigation}) {
                         
                         <View style={{flexDirection: 'row'}}>
                           
-                          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10, borderRightColor: '#000'}}>
+                          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10}}>
                             
                             <TouchableOpacity onPress={() => navigation.navigate('Deny Rights')}>
-                              <Icon name="user-times" size={50} color="#780206"/>
+                              <Icon name="question-circle" size={40} color="#801818"/>
                             </TouchableOpacity>
-                              <Text style={{color: 'white', textAlign: 'center',fontWeight: 'bold', fontSize: 15}}>Deny Rights</Text>
+                              <Text style={{color: 'white', textAlign: 'center',fontWeight: 'bold', fontSize: 15, borderColor: 'white'}}>FAQs</Text>
                           
                           </View>
                           
                           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10}}>
                           
+                          <TouchableOpacity onPress={() => navigation.navigate('Display')}>
+                              <Icon name="users" size={40} color="#801818"/>
+                          </TouchableOpacity>
+                            <Text style={{color: 'white', textAlign: 'center',fontWeight: 'bold', fontSize: 15}}>Display all users</Text>
+                        
+                        </View>
+
+                          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10}}>
+                          
                             <TouchableOpacity onPress={() => navigation.navigate('Admin_Notifications')}>
-                                <Icon name="bell" size={50} color="#780206"/>
+                                <Icon name="bell" size={40} color="#801818"/>
                             </TouchableOpacity>
-                              <Text style={{color: 'white', textAlign: 'center',fontWeight: 'bold', fontSize: 15}}>Notification</Text>
+                              <Text style={{color: 'white', textAlign: 'center',fontWeight: 'bold', fontSize: 15}}>Notifications</Text>
                           
                           </View>
                         
@@ -117,16 +124,25 @@ export default function Dashboard({navigation}) {
                         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10}}>
                           
                           <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-                              <Icon name="gear" size={50} color="#780206"/>
+                              <Icon name="gears" size={40} color="#801818"/>
                           </TouchableOpacity>
-                            <Text style={{color: 'white', textAlign: 'center',fontWeight: 'bold', fontSize: 15}}>Settings</Text>
+                            <Text style={{color: 'white', textAlign: 'center',fontWeight: 'bold', fontSize: 15}}>Change Password</Text>
                         
                         </View>
                         
                         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10}}>
                           
+                          <TouchableOpacity onPress={() => navigation.navigate('Feedback')}>
+                              <Icon name="address-card" size={40} color="#801818"/>
+                          </TouchableOpacity>
+                            <Text style={{color: 'white', textAlign: 'center',fontWeight: 'bold', fontSize: 15}}>Feedback</Text>
+                        
+                        </View>
+
+                        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10}}>
+                          
                           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                              <Icon name="sign-out" size={50} color="#780206"/>
+                              <Icon name="sign-out" size={40} color="#801818"/>
                           </TouchableOpacity>
                             <Text style={{color: 'white', textAlign: 'center',fontWeight: 'bold', fontSize: 15}}>logout</Text>
                         
@@ -140,45 +156,46 @@ export default function Dashboard({navigation}) {
 
               </View>
               
-              <View style={{flexDirection: 'row'}}>
+              <LinearGradient colors={['#14062E','#100010','#841851','#100010', '#14062E' ]}  start={{ x: 0, y: 0.5 }}
+                end={{ x: 1, y: 0.5 }} style={{flexDirection: 'row',borderColor:'#00008b',borderTopWidth:4,}}>
                 
-                <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center', backgroundColor: '#780206'}}>
+                <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
                   
                   <TouchableOpacity onPress={() => Alert.alert("Button Pressed")}>
-                      <Icon name="home" size={30} color="#fff"/>
+                      <Icon name="home" size={30} color="#c0c0c0"/>
                       <Text style= {{textAlign: 'center', color: 'white'}}>Home</Text>
                   </TouchableOpacity>
                 
                 </View>
 
-                <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center', backgroundColor: '#780206'}}>
+                <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
                 
                   <TouchableOpacity onPress={() => Alert.alert("Button Pressed")}>
-                    <Icon name="user-circle-o" size={30} color="#fff" />
+                    <Icon name="user-circle-o" size={30} color="#c0c0c0" />
                     <Text style= {{textAlign: 'center', color: 'white'}}>User</Text>
                   </TouchableOpacity>
                 
                 </View>
                 
-                <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center', backgroundColor: '#780206'}}>
+                <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
                 
                   <TouchableOpacity onPress={() => Alert.alert("Button Pressed")}>
-                    <Icon name="bars" size={30} color="#fff"/>
+                    <Icon name="bars" size={30} color="#c0c0c0"/>
                     <Text style= {{textAlign: 'center', color: 'white'}}>Menu</Text>
                   </TouchableOpacity>
                   
                 </View>
                 
-                <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center', backgroundColor: '#780206'}}>
+                <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
                 
                   <TouchableOpacity onPress={() => Alert.alert("Button Pressed")}>
-                    <Icon name="download" size={30} color="#fff"/>
+                    <Icon name="download" size={30} color="#c0c0c0"/>
                     <Text style= {{color: 'white'}}>Download</Text>
                   </TouchableOpacity>
                   
                 </View>
 
-              </View>
+              </LinearGradient>
 
         </LinearGradient>
       </View> 

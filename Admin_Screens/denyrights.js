@@ -33,9 +33,9 @@ export default function Denyrights({navigation}){
 
     return(
        <LinearGradient colors={['#780206','#061161']} style={{flex: 1, justifyContent: 'center'}}>
-           <View style={{flex: 1, justifyContent: 'center'}}>
+           {/*<View style={{flex: 1, justifyContent: 'center'}}>
                 <Text style={styles.header}>Deny Rights</Text>
-           </View>
+    </View>*/}
            <View style={{flex: 7, justifyContent: 'center'}}>
               <FormItem
                 label="Username:  "

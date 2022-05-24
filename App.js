@@ -16,6 +16,8 @@ import Dashboard from './Admin_Screens/Dashboard';
 import Admin_Notifications from './Admin_Screens/Admin_notifications';
 import Denyrights from './Admin_Screens/denyrights';
 import Settings from './Admin_Screens/settings';
+import Feedback from './Admin_Screens/feedback';
+import Display from './Admin_Screens/Display';
 
 const Stack=createNativeStackNavigator();
 
@@ -180,11 +182,78 @@ export default function App(){
             }
         }}/>
 
-        <Stack.Screen name = "Dashboard" component={Dashboard} options={{headerShown: false}} />
-        <Stack.Screen name = "Deny Rights" component={Denyrights} options={{headerShown: false}} />
-        <Stack.Screen name = "Admin_Notifications" component={Admin_Notifications} options={{headerShown: false}} />
-        <Stack.Screen name = "Settings" component={Settings} options={{headerShown: false}} />
+        <Stack.Screen name = "Dashboard" component={Dashboard} options={{ 
+          headerTitle:(props)=>(
+            <Image source={require('./assets/designing/logocard.png')}
+              style={{width:140, height:40}}
+            />
+          ),
+          headerBackVisible:false,
+          headerTitleAlign:'center',
+          headerTintColor: '#fff',
+          headerStyle:{
+            backgroundColor:'#841851',}
+          }} />
+        <Stack.Screen name = "Deny Rights" component={Denyrights} options={{ 
+          headerRight:(props)=>(
+            <Image source={require('./assets/designing/logocard.png')}
+              style={{width:120, height:35}}
+            />
+          ),
+          headerTitleAlign:'left',
+          headerTintColor: '#fff',
+          headerStyle:{
+            //elevation:2,
+          backgroundColor:'#841851',
+          }
+          }} />
+        <Stack.Screen name = "Admin_Notifications" component={Admin_Notifications} options={{
+           headerRight:(props)=>(
+            <Image source={require('./assets/designing/logocard.png')}
+              style={{width:120, height:35}}
+            />
+          ),
+          headerTitleAlign:'left',
+          headerTintColor: '#fff',
+          headerStyle:{
+            //elevation:2,
+          backgroundColor:'#841851',}
+        }} />
+        <Stack.Screen name = "Settings" component={Settings} options={{
+           headerRight:(props)=>(
+            <Image source={require('./assets/designing/logocard.png')}
+              style={{width:120, height:35}}
+            />
+          ),
+          headerTitleAlign:'left',
+          headerTintColor: '#fff',
+          headerStyle:{
+          backgroundColor:'#841851',}
+        }} />
 
+        <Stack.Screen name = "Feedback" component={Feedback} options={{
+           headerRight:(props)=>(
+            <Image source={require('./assets/designing/logocard.png')}
+              style={{width:120, height:35}}
+            />
+          ),
+          headerTitleAlign:'left',
+          headerTintColor: '#fff',
+          headerStyle:{
+          backgroundColor:'#841851',}
+        }} />
+
+          <Stack.Screen name = "Display" component={Display} options={{
+           headerRight:(props)=>(
+            <Image source={require('./assets/designing/logocard.png')}
+              style={{width:120, height:35}}
+            />
+          ),
+          headerTitleAlign:'left',
+          headerTintColor: '#fff',
+          headerStyle:{
+          backgroundColor:'#841851',}
+        }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

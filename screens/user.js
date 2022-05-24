@@ -214,19 +214,19 @@ export default function User({navigation}){
             >
                 <TouchableOpacity style={{flex:1,  justifyContent:'space-between', alignItems:'center'}}onPress={()=>{if(!loading)navigation.navigate('ContactUs')}}>
                     {/*<Image source={require('../assets/contact.png')} style={{width:50,height:50, opacity:0.8}}/>*/}
-                    <Icon name="address-card" size={30} color={dark?"#801818":"#d8cfc4"} />
+                    <Icon name="address-card" size={30} color={dark?"#c0c0c0":"#d8cfc4"} />
                 </TouchableOpacity>
                 <TouchableOpacity style={{flex:1,  justifyContent:'space-between', alignItems:'center'}} onPress={()=>{if(!loading)navigation.navigate('Notifications')}}>
                     {/*<Image source={require('../assets/notification.png')} style={{width:50,height:50, opacity:0.8}}/>*/}
-                    <Icon name="bell" size={30} color={dark?"#801818":"#d8cfc4"}  />
+                    <Icon name="bell" size={30} color={dark?"#c0c0c0":"#d8cfc4"}  />
                 </TouchableOpacity>
                 <TouchableOpacity style={{flex:1,  justifyContent:'space-between', alignItems:'center'}} onPress={()=>{if(!loading)navigation.navigate('FAQ')}}>
                     {/*<Image source={require('../assets/FAQ.png')} style={{width:50,height:50, opacity:0.8}}/>*/}
-                    <Icon name="question-circle" size={30} color={dark?"#801818":"#d8cfc4"}  />
+                    <Icon name="question-circle" size={30} color={dark?"#c0c0c0":"#d8cfc4"}  />
                 </TouchableOpacity>
                 <TouchableOpacity style={{flex:1,  justifyContent:'space-between', alignItems:'center'}} onPress={signOut}>
                     {/*<Image source={require('../assets/signout.png')} style={{width:50,height:50, opacity:0.8}}/>*/}
-                    <Icon name="sign-out" size={30} color={dark?"#801818":"#d8cfc4"}  />
+                    <Icon name="sign-out" size={30} color={dark?"#c0c0c0":"#d8cfc4"}  />
                 </TouchableOpacity>
 
             </LinearGradient>
