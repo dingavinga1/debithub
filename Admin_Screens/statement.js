@@ -45,7 +45,7 @@ export default function Admin_Statements({navigation}){
                     <Text style= {[styles.buttons , {textAlign: 'center', color: '#c0c0c0', marginTop: 20, backgroundColor:'#841851', color: '#c0c0c0', borderColor: '#c0c0c0', borderWidth: 2, paddingBottom: 3}]}>Get Statement</Text>
                 </TouchableOpacity>
         </View>
-        <Text style ={{textAlign: 'center', color: '#c0c0c0', fontSize: 17}}>▶For Checking the statement of a specific user, you will have to enter the email address of that customer.</Text>
+        <Text style ={{paddingLeft: 10, paddingRight: 10, marginLeft: 5,marginRight:5, textAlign: 'center', color: '#c0c0c0', fontSize: 17}}>▶For Checking the statement of a specific user, you will have to enter the email address of that customer.</Text>
         <LinearGradient colors={['#14062E','#100010','#841851','#100010', '#14062E' ]}  start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }} style={{flexDirection: 'row',borderColor:'#00008b',borderTopWidth:4,}}>
                 

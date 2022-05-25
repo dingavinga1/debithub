@@ -24,9 +24,9 @@ export const styles=StyleSheet.create ({
     },
     card: {
       height: 200 ,
-      width: 325,
+      width: 300,
       marginLeft: 35,
-      marginRight: 35,
+      marginRight: 75,
       borderRadius: 5,
       borderWidth: 2,
       borderColor: '#7393B3'

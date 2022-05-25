@@ -5,6 +5,7 @@ import {
   View,
   Image,
   StyleSheet,
+  ImageBackground,
   TouchableOpacity,
   Alert,
 } from 'react-native';
@@ -16,6 +17,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { LineChart } from 'react-native-chart-kit';
 import { NavigationContainer } from '@react-navigation/native';
 import { VictoryBar, VictoryChart, VictoryGroup } from 'victory-native';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createNativeStackNavigator();
 
@@ -62,6 +66,7 @@ export default function Dashboard({navigation}) {
                             borderRadius: 0,
                             borderwidth: 2,
                             borderColor: '#ff8c00',
+                            position: 'absolute',
                           }
                         }}
                         bezier
@@ -74,11 +79,13 @@ export default function Dashboard({navigation}) {
                       />
                       
                     </View>:
-                      <Image
-                      style= {[styles.card]}
-                      source= {require('../assets/bankcard2.jpg')}/>}
+                    <ImageBackground source={require('../assets/mycard.jpg')} style={{width:'90%', height:'85%',elevation:10, marginleft: 30}} imageStyle={{ borderWidth:2,borderColor:'maroon',borderRadius: 10, marginLeft: 40, marginRight: 30, marginTop: 20}} >
+                        <Image source={require('../assets/designing/logocardL.png')} style={{width:100,height:40,position:'absolute',bottom:190,left:40,alignSelf:'flex-end'}}/>
+                        <Text style={[{color:'#c0c0c0',fontWeight:'bold'}, {fontSize:17, position:'absolute', bottom:30, left:50,}]}>{auth().currentUser.email}</Text>
+                        <Text style={[{color:'darkred',fontWeight:'bold', textAlign: 'center', fontFamily: 'times new roman'}, {fontSize:32, position:'absolute', bottom:110, left:100,}]}>Admin</Text>
+                        <Image source={require('../assets/visa.png')} style={{width:40,height:40,position:'absolute',bottom:25,right:10,alignSelf:'flex-end'}}/>
+                    </ImageBackground>}
                         <Text style={{color: 'white', textAlign: 'center', fontSize: 15}}>▶ Click Card for User Activity</Text>
-
                   </TouchableOpacity>
                 </View>
 
@@ -87,15 +94,6 @@ export default function Dashboard({navigation}) {
                     <View style={{flex: 2, padding: 10}}>
                         
                         <View style={{flexDirection: 'row'}}>
-                          
-                         {/* <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10}}>
-                            
-                            <TouchableOpacity onPress={() => navigation.navigate('Deny Rights')}>
-                              <Icon name="question-circle" size={40} color="#801818"/>
-                            </TouchableOpacity>
-                              <Text style={{color: 'white', textAlign: 'center',fontWeight: 'bold', fontSize: 15, borderColor: 'white'}}>FAQs</Text>
-                          
-                      </View>*/}
                           
                           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10}}>
                           
