@@ -18,7 +18,7 @@ import Denyrights from './Admin_Screens/denyrights';
 import Settings from './Admin_Screens/settings';
 import Feedback from './Admin_Screens/feedback';
 import Display from './Admin_Screens/Display';
-import Admin_Statements from './Admin_Screens/statement';
+import Admin_Statements from './Admin_Screens/admin_statement';
 
 const Stack=createNativeStackNavigator();
 

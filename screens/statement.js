@@ -17,7 +17,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Loader from './loading'
 
-export default function Faq() {
+export default function Statement() {
     const [dark, setDark]=useState(false);
     const [all, setAll]=useState([]);
     const [sent, setSent]=useState([]);

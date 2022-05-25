@@ -28,10 +28,10 @@ export default function Dashboard({navigation}) {
   const [set, setSet]=useState(false);
   
   const line = {
-    labels: ['Abdullah', 'Aisha', 'Usman', 'Musab', 'Ismail', 'Huzaifa', 'Sameel'],
+    labels: ['Dinga', 'Aisha', 'Usman', 'huzaifi', 'Musab', 'Ismail', 'Shani'],
     datasets: [
       {
-        data: [20, 45, 28, 80, 99, 43, 20],
+        data: [20, 40, 25, 50, 90, 40, 20],
         strokeWidth: 2, // optional
       },
     ],
@@ -52,7 +52,7 @@ export default function Dashboard({navigation}) {
                     <View>
                       <LineChart
                         data={line}
-                        width={360} // from react-native
+                        width={340} // from react-native
                         height={200}
                         //yAxisLabel={'$'}
                         chartConfig={{
@@ -61,6 +61,7 @@ export default function Dashboard({navigation}) {
                           backgroundGradientTo: '#061161',
                           borderColor: '#fff',
                           borderwidth: 4,
+                          position: 'absolute',
                           color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
                           style: {
                             borderRadius: 0,
