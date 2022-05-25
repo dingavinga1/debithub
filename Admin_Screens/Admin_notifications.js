@@ -152,18 +152,18 @@ export default function Admin_Notifications({navigation}){
             </Modal>
             
             <View style={{flex:1, width:'100%'}}>
+                    
                 <FlatList
-                    contentContainerStyle={{paddingHorizontal:10,}}
+                    contentContainerStyle={{paddingHorizontal:10, padding: 10}}
                     data={which=='All'?all:which=='Bank'?notifications:which=='Feedback'?feedback:promo}
                     renderItem={({item})=>
                         {
                             if(!item.hasOwnProperty('question')){
                                 return(
+                                    
                                     <View style={[{ width:'100%',marginTop:10,borderRadius:15,paddingVertical:15,backgroundColor:'#841851',}, {width:'100%'}]}>
-                                        <Text style={[{fontSize:20,color:'silver'}, {fontWeight:'normal'}]}>{item.data}</Text>
-                                        <TouchableOpacity onPress={() => setmodalopen(true)}>
-                                            <Text style= {[styles.buttons , {textAlign: 'center', color: '#c0c0c0'}]}>Add New</Text>
-                                        </TouchableOpacity>
+                                         
+                                        <Text style={[{fontSize:20,color:'silver', padding: 10}, {fontWeight:'normal'}]}>{item.data}</Text>
                                     </View>
                                 );
                             }else{
@@ -171,9 +171,6 @@ export default function Admin_Notifications({navigation}){
                                     <View style={[{ width:'100%',marginTop:10,borderRadius:15,paddingVertical:15,backgroundColor:'#841851',}, {width:'100%'}]}>
                                         <Text style={[{fontSize:20,color:'silver'}, {fontWeight:'bold'}]}>You: {item.question}</Text>
                                         <Text style={[{fontSize:20,color:'silver'}, {fontWeight:'normal'}]}>{item.answer}</Text>
-                                        <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
-                                            <Text style= {[styles.buttons , {textAlign: 'center', color: '#c0c0c0'}]}>Reply</Text>
-                                        </TouchableOpacity>
                                     </View>
                                 );
                             }
@@ -182,6 +179,9 @@ export default function Admin_Notifications({navigation}){
                 />
             </View>
             <Loader animating={loading} />
+            <TouchableOpacity onPress={() => setmodalopen(true)} style = {{marginLeft: 170, position: 'absolute', right: 15, bottom: 124}}>
+                    <Icon name="plus" size={50} color="#c0c0c0" style ={styles.adder} />
+                    </TouchableOpacity>
             <FloatingMenu
                 isOpen={open}
                 items={items}
@@ -196,23 +196,23 @@ export default function Admin_Notifications({navigation}){
                 buttonWidth={50}
                 innerWidth={50}
             />
-            <LinearGradient colors={['#14062E','#100010','#841851','#100010', '#14062E' ]}  start={{ x: 0, y: 0.5 }}
+             <LinearGradient colors={['#14062E','#100010','#841851','#100010', '#14062E' ]}  start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }} style={{flexDirection: 'row',borderColor:'#00008b',borderTopWidth:4,}}>
                 
                 <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
                   
-                  <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
-                      <Icon name="home" size={30} color="#c0c0c0"/>
-                      <Text style= {{textAlign: 'center', color: 'white'}}>Home</Text>
+                  <TouchableOpacity onPress={() => navigation.navigate("Dashboard")}>
+                      <Icon name="home" size={30} color="#c0c0c0" style={{padding: 2, margin:2}}/>
+                      {/*<Text style= {{textAlign: 'center', color: '#c0c0c0', textAlign: 'center', fontSize: 15, fontWeight: 'bold'}}>Home</Text>*/}
                   </TouchableOpacity>
                 
                 </View>
 
                 <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
                 
-                  <TouchableOpacity onPress={() => Alert.alert("Button Pressed")}>
-                    <Icon name="user-circle-o" size={30} color="#c0c0c0" />
-                    <Text style= {{textAlign: 'center', color: 'white'}}>User</Text>
+                  <TouchableOpacity onPress={() => navigation.navigate("Admin_Statements")}>
+                    <Icon name="envelope-o" size={30} color="#c0c0c0" style={{padding: 2, margin:2}}/>
+                    {/*<Text style= {{textAlign: 'center', color: '#c0c0c0',  textAlign: 'center',fontSize: 15, fontWeight: 'bold'}}>History</Text>*/}
                   </TouchableOpacity>
                 
                 </View>
@@ -220,20 +220,20 @@ export default function Admin_Notifications({navigation}){
                 <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
                 
                   <TouchableOpacity onPress={() => Alert.alert("Button Pressed")}>
-                    <Icon name="bars" size={30} color="#c0c0c0"/>
-                    <Text style= {{textAlign: 'center', color: 'white'}}>Menu</Text>
+                    <Icon name="bars" size={30} color="#c0c0c0" style={{padding: 2, margin:2}}/>
+                    {/*<Text style= {{textAlign: 'center', color: '#c0c0c0',  textAlign: 'center',fontSize: 15, fontWeight: 'bold'}}>Menu</Text>*/}
                   </TouchableOpacity>
                   
                 </View>
                 
-                <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
-                
-                  <TouchableOpacity onPress={() => Alert.alert("Button Pressed")}>
-                    <Icon name="download" size={30} color="#c0c0c0"/>
-                    <Text style= {{color: 'white'}}>Download</Text>
-                  </TouchableOpacity>
-                  
-                </View>
+                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10}}>
+                          
+                          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                              <Icon name="sign-out" size={30} color="#c0c0c0" style={{padding: 2, margin:2}}/>
+                          </TouchableOpacity>
+                            {/*<Text style={{color: '#c0c0c0', textAlign: 'center',fontWeight: 'bold', fontSize: 15}}>logout</Text>*/}
+                        
+                  </View>
 
               </LinearGradient>
         </LinearGradient>

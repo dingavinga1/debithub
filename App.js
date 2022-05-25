@@ -18,6 +18,7 @@ import Denyrights from './Admin_Screens/denyrights';
 import Settings from './Admin_Screens/settings';
 import Feedback from './Admin_Screens/feedback';
 import Display from './Admin_Screens/Display';
+import Admin_Statements from './Admin_Screens/statement';
 
 const Stack=createNativeStackNavigator();
 
@@ -244,6 +245,18 @@ export default function App(){
         }} />
 
           <Stack.Screen name = "Display" component={Display} options={{
+           headerRight:(props)=>(
+            <Image source={require('./assets/designing/logocard.png')}
+              style={{width:120, height:35}}
+            />
+          ),
+          headerTitleAlign:'left',
+          headerTintColor: '#fff',
+          headerStyle:{
+          backgroundColor:'#841851',}
+        }} />
+
+      <Stack.Screen name = "Admin_Statements" component={Admin_Statements} options={{
            headerRight:(props)=>(
             <Image source={require('./assets/designing/logocard.png')}
               style={{width:120, height:35}}

@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
-  Alert,
+  Modal,
   TextInput,
-  KeyboardAvoidingView,
+  StyleSheet,
   TouchableOpacity,
-  Image,
-  Button,
+  FlatList,
+  Alert,
+  KeyboardAvoidingView
 } from 'react-native';
 
 import { Linking } from 'react-native'
@@ -22,55 +23,30 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import { FloatingMenu } from 'react-native-floating-action-menu';
 import Loader from '../screens/loading';
-export default function Settings({navigation}){
 
-    const [old, setold] = useState("");
+export default function Admin_Statements({navigation}){
+    const [email, setemail] = useState("");
 
-    const [newpass, setnewpass] = useState("");
+    function getstatement(){
 
-    const [confirm, setconfirm] = useState("");
-
-    function changePassword(){
-        
     }
     return(
-        <LinearGradient colors={[ '#1e2127','#000','#1e2127']} style={{flex: 8, justifyContent: 'center'}}>
-            <View style={[{flex: 1}]}>
-                    <Text style = {{margin: 10, marginTop: 20, fontSize: 20, fontWeight: 'bold', color: '#841851'}}>Enter Old Password:</Text>
-            <TextInput
-                    placeholder="Old Password..."
-                    style={[styles.notification_input, {height: '10%', borderColor: '#841851'}]}
+    <LinearGradient colors={[ '#1e2127','#000','#1e2127']} style={{flex: 8, justifyContent: 'center'}}>
+       <View style={{flex: 1, justifyContent: 'center'}}>
+       <Text style = {{margin: 10, marginTop: 20, fontSize: 20, fontWeight: 'bold', color: '#841851'}}>Enter Email:</Text>
+       <TextInput
+                    placeholder="Email Address..."
+                    style={[styles.notification_input, {height: '10%'}]}
                     textAlignVertical="top"
                     placeholderTextColor={"#c0c0c0"}
-                    onChangeText={setold}
+                    onChangeText={setemail}
                 ></TextInput>
-                                   
-                    <Text style = {{margin: 10, marginTop: 20, fontSize: 20, fontWeight: 'bold', color: '#841851'}}>Enter New Password:</Text>
-
-                <TextInput
-                    placeholder="New Password..."
-                    style={[styles.notification_input, {height: '10%', borderColor: '#841851'}]}
-                    textAlignVertical="top"
-                    placeholderTextColor={"#c0c0c0"}
-                    onChangeText={setnewpass}
-                ></TextInput>
-                                    
-                    <Text style = {{margin: 10, marginTop: 20, fontSize: 20, fontWeight: 'bold', color: '#841851'}}>Confirm New Password:</Text>
-                
-                <TextInput
-                    placeholder="Confirm New Password..."
-                    style={[styles.notification_input, {height: '10%', borderColor: '#841851'}]}
-                    textAlignVertical="top"
-                    placeholderTextColor={"#c0c0c0"}
-                    onChangeText={setconfirm}
-                ></TextInput>
-
-                <TouchableOpacity onPress={() => changePassword()}>
-                    <Text style= {[styles.buttons , {textAlign: 'center', color: '#c0c0c0', marginTop: 20, backgroundColor:'#841851', color: '#c0c0c0', borderColor: '#c0c0c0', borderWidth: 2, paddingBottom: 3}]}>Change</Text>
+                <TouchableOpacity onPress={() => getstatement()}>
+                    <Text style= {[styles.buttons , {textAlign: 'center', color: '#c0c0c0', marginTop: 20, backgroundColor:'#841851', color: '#c0c0c0', borderColor: '#c0c0c0', borderWidth: 2, paddingBottom: 3}]}>Get Statement</Text>
                 </TouchableOpacity>
-
-            </View>
-            <LinearGradient colors={['#14062E','#100010','#841851','#100010', '#14062E' ]}  start={{ x: 0, y: 0.5 }}
+        </View>
+        <Text style ={{textAlign: 'center', color: '#c0c0c0', fontSize: 17}}>▶For Checking the statement of a specific user, you will have to enter the email address of that customer.</Text>
+        <LinearGradient colors={['#14062E','#100010','#841851','#100010', '#14062E' ]}  start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }} style={{flexDirection: 'row',borderColor:'#00008b',borderTopWidth:4,}}>
                 
                 <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
@@ -84,7 +60,7 @@ export default function Settings({navigation}){
 
                 <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
                 
-                  <TouchableOpacity onPress={() => navigation.navigate("Admin_Statements")}>
+                  <TouchableOpacity onPress={() => Alert.alert("You are already on Statement's page.")}>
                     <Icon name="envelope-o" size={30} color="#c0c0c0" style={{padding: 2, margin:2}}/>
                     {/*<Text style= {{textAlign: 'center', color: '#c0c0c0',  textAlign: 'center',fontSize: 15, fontWeight: 'bold'}}>History</Text>*/}
                   </TouchableOpacity>
@@ -111,6 +87,5 @@ export default function Settings({navigation}){
 
               </LinearGradient>
         </LinearGradient>
-        
     );
 }

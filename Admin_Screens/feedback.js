@@ -69,7 +69,7 @@ export default function Feedback({navigation}){
                  <TouchableOpacity style={{marginTop: 50, marginLeft: 120, marginRight: 120, backgroundColor: 'transparent', borderRadius: 20}}
                     onPress= {() => {handlemodal() ; sendfeedback() ; Alert.alert('New Notificaion Added')}} 
                     >
-                     <Text style= {[{textAlign: 'center', color: '#c0c0c0', backgroundColor: "#841851", borderColor: "#c0c0c0",borderWidth: 4, fontSize: 20, fontWeight: 'bold', borderRadius: 15, paddingTop:5}]}>ADD</Text> 
+                     <Text style= {[{textAlign: 'center', color: '#c0c0c0', backgroundColor: "#841851", borderColor: "#c0c0c0",borderWidth: 4, fontSize: 20, fontWeight: 'bold', borderRadius: 15, paddingTop:5}]}>Send</Text> 
                 </TouchableOpacity>
             </View>
             </View>
@@ -81,7 +81,7 @@ export default function Feedback({navigation}){
                 <View style = {{flex:1,flexDirection:'row'}} >
                     <Text style={[{fontSize:20,color:'white',flex:10}, {fontWeight:'normal'}]}>User{item.key}:  {item.user}</Text>  
                     <TouchableOpacity disabled={false} style={{flex:1}} onPress={()=>toggleAns(item.key)}>
-                        <Text style={[{fontSize:25,fontWeight:'bold'}, {color:'#000'}]}>{!hidden[item.key-1]?"\u{25BC}":"\u{25B2}"}</Text>                 
+                        <Text style={[{fontSize:25,fontWeight:'bold'}, {color:'#000'}]}>{!hidden[item.key-1]?"\u{1F448}":"\u{1F447}"}</Text>                 
                     </TouchableOpacity>
                 </View>
                 {hidden[item.key-1]?<Text style={[{fontSize:18, fontWeight: 'bold'},{color:'#000'}]}>FeedBack: {item.feedback}</Text>:<></>}
@@ -95,23 +95,23 @@ export default function Feedback({navigation}){
         />
 
 
-            <LinearGradient colors={['#14062E','#100010','#841851','#100010', '#14062E' ]}  start={{ x: 0, y: 0.5 }}
+<LinearGradient colors={['#14062E','#100010','#841851','#100010', '#14062E' ]}  start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }} style={{flexDirection: 'row',borderColor:'#00008b',borderTopWidth:4,}}>
                 
                 <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
                   
-                  <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
-                      <Icon name="home" size={30} color="#c0c0c0"/>
-                      <Text style= {{textAlign: 'center', color: 'white'}}>Home</Text>
+                  <TouchableOpacity onPress={() => navigation.navigate("Dashboard")}>
+                      <Icon name="home" size={30} color="#c0c0c0" style={{padding: 2, margin:2}}/>
+                      {/*<Text style= {{textAlign: 'center', color: '#c0c0c0', textAlign: 'center', fontSize: 15, fontWeight: 'bold'}}>Home</Text>*/}
                   </TouchableOpacity>
                 
                 </View>
 
                 <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
                 
-                  <TouchableOpacity onPress={() => Alert.alert("Button Pressed")}>
-                    <Icon name="user-circle-o" size={30} color="#c0c0c0" />
-                    <Text style= {{textAlign: 'center', color: 'white'}}>User</Text>
+                  <TouchableOpacity onPress={() => navigation.navigate("Admin_Statements")}>
+                    <Icon name="envelope-o" size={30} color="#c0c0c0" style={{padding: 2, margin:2}}/>
+                    {/*<Text style= {{textAlign: 'center', color: '#c0c0c0',  textAlign: 'center',fontSize: 15, fontWeight: 'bold'}}>History</Text>*/}
                   </TouchableOpacity>
                 
                 </View>
@@ -119,20 +119,20 @@ export default function Feedback({navigation}){
                 <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
                 
                   <TouchableOpacity onPress={() => Alert.alert("Button Pressed")}>
-                    <Icon name="bars" size={30} color="#c0c0c0"/>
-                    <Text style= {{textAlign: 'center', color: 'white'}}>Menu</Text>
+                    <Icon name="bars" size={30} color="#c0c0c0" style={{padding: 2, margin:2}}/>
+                    {/*<Text style= {{textAlign: 'center', color: '#c0c0c0',  textAlign: 'center',fontSize: 15, fontWeight: 'bold'}}>Menu</Text>*/}
                   </TouchableOpacity>
                   
                 </View>
                 
-                <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
-                
-                  <TouchableOpacity onPress={() => Alert.alert("Button Pressed")}>
-                    <Icon name="download" size={30} color="#c0c0c0"/>
-                    <Text style= {{color: 'white'}}>Download</Text>
-                  </TouchableOpacity>
-                  
-                </View>
+                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10}}>
+                          
+                          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                              <Icon name="sign-out" size={30} color="#c0c0c0" style={{padding: 2, margin:2}}/>
+                          </TouchableOpacity>
+                            {/*<Text style={{color: '#c0c0c0', textAlign: 'center',fontWeight: 'bold', fontSize: 15}}>logout</Text>*/}
+                        
+                  </View>
 
               </LinearGradient>
 

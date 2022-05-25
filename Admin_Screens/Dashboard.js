@@ -24,10 +24,10 @@ export default function Dashboard({navigation}) {
   const [set, setSet]=useState(false);
   
   const line = {
-    labels: ['Abdullah', 'Aisha', 'Usman', 'Musab', 'Ismail', 'Huzaifa'],
+    labels: ['Abdullah', 'Aisha', 'Usman', 'Musab', 'Ismail', 'Huzaifa', 'Sameel'],
     datasets: [
       {
-        data: [20, 45, 28, 80, 99, 43],
+        data: [20, 45, 28, 80, 99, 43, 20],
         strokeWidth: 2, // optional
       },
     ],
@@ -88,14 +88,14 @@ export default function Dashboard({navigation}) {
                         
                         <View style={{flexDirection: 'row'}}>
                           
-                          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10}}>
+                         {/* <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10}}>
                             
                             <TouchableOpacity onPress={() => navigation.navigate('Deny Rights')}>
                               <Icon name="question-circle" size={40} color="#801818"/>
                             </TouchableOpacity>
                               <Text style={{color: 'white', textAlign: 'center',fontWeight: 'bold', fontSize: 15, borderColor: 'white'}}>FAQs</Text>
                           
-                          </View>
+                      </View>*/}
                           
                           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10}}>
                           
@@ -111,7 +111,7 @@ export default function Dashboard({navigation}) {
                             <TouchableOpacity onPress={() => navigation.navigate('Admin_Notifications')}>
                                 <Icon name="bell" size={40} color="#801818"/>
                             </TouchableOpacity>
-                              <Text style={{color: 'white', textAlign: 'center',fontWeight: 'bold', fontSize: 15}}>Notifications</Text>
+                              <Text style={{color: 'white', textAlign: 'center',fontWeight: 'bold', fontSize: 15}}>Add Notifications</Text>
                           
                           </View>
                         
@@ -123,28 +123,19 @@ export default function Dashboard({navigation}) {
                         
                         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10}}>
                           
+                          <TouchableOpacity onPress={() => navigation.navigate('Feedback')}>
+                              <Icon name="address-card" size={40} color="#801818"/>
+                          </TouchableOpacity>
+                            <Text style={{color: 'white', textAlign: 'center',fontWeight: 'bold', fontSize: 15}}>Feedback Reply</Text>
+                        
+                        </View>
+
+                       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10}}>
+                          
                           <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
                               <Icon name="gears" size={40} color="#801818"/>
                           </TouchableOpacity>
                             <Text style={{color: 'white', textAlign: 'center',fontWeight: 'bold', fontSize: 15}}>Change Password</Text>
-                        
-                        </View>
-                        
-                        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10}}>
-                          
-                          <TouchableOpacity onPress={() => navigation.navigate('Feedback')}>
-                              <Icon name="address-card" size={40} color="#801818"/>
-                          </TouchableOpacity>
-                            <Text style={{color: 'white', textAlign: 'center',fontWeight: 'bold', fontSize: 15}}>Feedback</Text>
-                        
-                        </View>
-
-                        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10}}>
-                          
-                          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                              <Icon name="sign-out" size={40} color="#801818"/>
-                          </TouchableOpacity>
-                            <Text style={{color: 'white', textAlign: 'center',fontWeight: 'bold', fontSize: 15}}>logout</Text>
                         
                         </View>
                     
@@ -161,18 +152,18 @@ export default function Dashboard({navigation}) {
                 
                 <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
                   
-                  <TouchableOpacity onPress={() => Alert.alert("Button Pressed")}>
-                      <Icon name="home" size={30} color="#c0c0c0"/>
-                      <Text style= {{textAlign: 'center', color: 'white'}}>Home</Text>
+                  <TouchableOpacity onPress={() => Alert.alert("Already on Dashboard")}>
+                      <Icon name="home" size={30} color="#c0c0c0" style={{padding: 2, margin:2}}/>
+                      {/*<Text style= {{textAlign: 'center', color: '#c0c0c0', textAlign: 'center', fontSize: 15, fontWeight: 'bold'}}>Home</Text>*/}
                   </TouchableOpacity>
                 
                 </View>
 
                 <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
                 
-                  <TouchableOpacity onPress={() => Alert.alert("Button Pressed")}>
-                    <Icon name="user-circle-o" size={30} color="#c0c0c0" />
-                    <Text style= {{textAlign: 'center', color: 'white'}}>User</Text>
+                  <TouchableOpacity onPress={() => navigation.navigate("Admin_Statements")}>
+                    <Icon name="envelope-o" size={30} color="#c0c0c0" style={{padding: 2, margin:2}}/>
+                    {/*<Text style= {{textAlign: 'center', color: '#c0c0c0',  textAlign: 'center',fontSize: 15, fontWeight: 'bold'}}>History</Text>*/}
                   </TouchableOpacity>
                 
                 </View>
@@ -180,20 +171,20 @@ export default function Dashboard({navigation}) {
                 <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
                 
                   <TouchableOpacity onPress={() => Alert.alert("Button Pressed")}>
-                    <Icon name="bars" size={30} color="#c0c0c0"/>
-                    <Text style= {{textAlign: 'center', color: 'white'}}>Menu</Text>
+                    <Icon name="bars" size={30} color="#c0c0c0" style={{padding: 2, margin:2}}/>
+                    {/*<Text style= {{textAlign: 'center', color: '#c0c0c0',  textAlign: 'center',fontSize: 15, fontWeight: 'bold'}}>Menu</Text>*/}
                   </TouchableOpacity>
                   
                 </View>
                 
-                <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
-                
-                  <TouchableOpacity onPress={() => Alert.alert("Button Pressed")}>
-                    <Icon name="download" size={30} color="#c0c0c0"/>
-                    <Text style= {{color: 'white'}}>Download</Text>
-                  </TouchableOpacity>
-                  
-                </View>
+                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10}}>
+                          
+                          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                              <Icon name="sign-out" size={30} color="#c0c0c0" style={{padding: 2, margin:2}}/>
+                          </TouchableOpacity>
+                            {/*<Text style={{color: '#c0c0c0', textAlign: 'center',fontWeight: 'bold', fontSize: 15}}>logout</Text>*/}
+                        
+                  </View>
 
               </LinearGradient>
 
