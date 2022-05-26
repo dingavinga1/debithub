@@ -55,8 +55,8 @@ export default function Dashboard({navigation}) {
             <View style= {{flex: 1,justifyContent: 'flex-end'}}>
             <View style={{opacity: .88, backgroundColor: 'black', height: '100%' }}>
                 
-            <ImageBackground source={require('../assets/light.jpg')} style={{width:360, height:200,elevation:10}} imageStyle = {{borderWidth: 2, borderColor: 'darkred'}} >
-                        <Image source={require('../assets/designing/logocardL.png')} style={{width:100,height:40,position: 'absolute',bottom:160,left:10,alignSelf:'flex-end'}}/>
+            <ImageBackground source={require('../assets/light.jpg')} style={{width:'100%', height:200,elevation:10}} imageStyle = {{borderWidth: 2, borderColor: 'darkred'}} >
+                        <Image source={require('../assets/designing/logocardL.png')} style={{width:100,height:40}}/>
                         <Text style={[{color:'#000',fontWeight:'bold'}, {fontSize:17, position:'absolute', bottom:5, left:10,}]}>{auth().currentUser.email}</Text>
                         <Text style={[{color:'darkred',fontWeight:'bold', textAlign: 'center', fontFamily: 'times new roman'}, {fontSize:32, position:'absolute', bottom:80, left:120,}]}>Admin</Text>
                         <Image source={require('../assets/visa.png')} style={{width:40,height:40,position:'absolute',bottom:5,right:10,alignSelf:'flex-end'}}/>
@@ -130,7 +130,7 @@ export default function Dashboard({navigation}) {
                       
                     </View>:
                     <ImageBackground source={require('../assets/mycard.jpg')} style={{width:'90%', height:'85%',elevation:10, marginleft: 30}} imageStyle={{ borderWidth:2,borderColor:'maroon',borderRadius: 10, marginLeft: 40, marginRight: 30, marginTop: 20}} >
-                        <Image source={require('../assets/designing/logocardL.png')} style={{width:100,height:40,position:'absolute',bottom:190,left:40,alignSelf:'flex-end'}}/>
+                        <Image source={require('../assets/designing/logocardL.png')} style={{width:100,height:40, position:'absolute', top:20, left:40}}/>
                         <Text style={[{color:'#c0c0c0',fontWeight:'bold'}, {fontSize:17, position:'absolute', bottom:30, left:50,}]}>{auth().currentUser.email}</Text>
                         <Text style={[{color:'darkred',fontWeight:'bold', textAlign: 'center', fontFamily: 'times new roman'}, {fontSize:32, position:'absolute', bottom:110, left:100,}]}>Admin</Text>
                         <Image source={require('../assets/visa.png')} style={{width:40,height:40,position:'absolute',bottom:25,right:10,alignSelf:'flex-end'}}/>
