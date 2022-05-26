@@ -31,15 +31,11 @@ export default function Feedback({navigation}){
   const [modalopen, setmodalopen] = useState(false);  
   const [modal2open, setmodal2open] = useState(false);
   const [newnotes, setnewnotes] = useState("");
+  const [loading, setLoading]=useState(false);
 
-    const [FAQs,setFAQs]=useState([
-        { user: 'Muhammad Huzaifa',feedback: 'I am having Problems during my login', date: '01/05/2022', key:'1'},
-        { user: 'Abdullah Irfan',feedback: 'i am having problems during my logout', date: '01/04/2022',key:'2'},
-        { user: 'Aisha Irfan',feedback: 'I ma not still capable of transferring my funds', date: '23/03/2022',key:'3'},
-        { user: 'Muhammad Usman Shahid',feedback: 'I cant pay my online bills please help', date: '31/12/2021',key:'4'},
-        { user: 'Musab Imran',feedback: 'the statement shoen in my account is wrong', date: '06/06/2022',key:'5'},
-        { user: 'Ismail Ramzan',feedback: 'The interface is really very amazing', date: '10/22/2022',key:'6'},
-    ]);
+  const [curr, setCurr]=useState("");
+
+    const [FAQs,setFAQs]=useState([]);
     const [hidden, setHidden]=useState([false, false, false, false, false, false, false, false, false]);
 
     function toggleAns(key){
@@ -48,8 +44,36 @@ export default function Feedback({navigation}){
         setHidden(x);
     }
 
-    function sendfeedback(){
+  async function getData(){
+    const temp=[];
+    const subscriber=await firestore()
+    .collection('Admin').doc('Feedback').get().then(doc=>{
+        const data=doc.data();
+        const length=data.Feedback.length;
+        for(let i=0; i<length; i++){
+            temp.push(data.Feedback[i]);
+        }
+    });
+    setLoading(false);
+    setFAQs(temp);
+}
 
+useEffect(()=>{
+    setLoading(true);
+    
+    getData();
+}, []);
+
+    async function sendfeedback(){
+      await firestore().collection("Admin").doc("Notifications").get().then(doc=>{
+        const data=doc.data().Feedback;
+        data.push({Question:curr.Complaint, Answer:newnotes, user:curr.User});
+        
+        firestore().collection("Admin").doc("Notifications").update({
+          Feedback:data
+        }).then(alert("Sent feedback"));
+      })
+      
     }
 
     function handlemodal(){
@@ -118,7 +142,7 @@ export default function Feedback({navigation}){
                     onChangeText={setnewnotes}
                 ></TextInput>
                  <TouchableOpacity style={{marginTop: 50, marginLeft: 120, marginRight: 120, backgroundColor: 'transparent', borderRadius: 20}}
-                    onPress= {() => {handlemodal() ; sendfeedback() ; Alert.alert('Feedback Sent to customer')}} 
+                    onPress= {() => {handlemodal() ; sendfeedback(); }} 
                     >
                      <Text style= {[{textAlign: 'center', color: '#c0c0c0', backgroundColor: "#841851", borderColor: "#c0c0c0",borderWidth: 4, fontSize: 20, fontWeight: 'bold', borderRadius: 15, paddingTop:5}]}>Send</Text> 
                 </TouchableOpacity>
@@ -130,14 +154,13 @@ export default function Feedback({navigation}){
             renderItem={({ item }) => (
             <View style={{backgroundColor: '#841851', borderRadius: 15,paddingTop: 25,paddingBottom: 25,paddingVertical:15,borderBottomWidth:1.5,borderTopWidth:0,borderColor:'#14062E',paddingHorizontal:10, margin: 10, marginBottom: 0}}>
                 <View style = {{flex:1,flexDirection:'row'}} >
-                    <Text style={[{fontSize:20,color:'white',flex:10}, {fontWeight:'normal'}]}>User{item.key}:  {item.user}</Text>  
+                    <Text style={[{fontSize:20,color:'white',flex:10}, {fontWeight:'normal'}]}>{item.User}</Text>  
                     <TouchableOpacity disabled={false} style={{flex:1}} onPress={()=>toggleAns(item.key)}>
                         <Text style={[{fontSize:25,fontWeight:'bold'}, {color:'#000'}]}>{!hidden[item.key-1]?"\u{1F448}":"\u{1F447}"}</Text>                 
                     </TouchableOpacity>
                 </View>
-                {hidden[item.key-1]?<Text style={[{fontSize:18, fontWeight: 'bold'},{color:'#000'}]}>FeedBack: {item.feedback}</Text>:<></>}
-                {hidden[item.key-1]?<Text style={[{fontSize:18, fontWeight: 'bold'},{color:'#000'}]}>Date: {item.date}</Text>:<></>}
-                {hidden[item.key-1]?<TouchableOpacity onPress={() => setmodalopen(true)}>
+                {hidden[item.key-1]?<Text style={[{fontSize:18, fontWeight: 'bold'},{color:'#000'}]}>FeedBack: {item.Complaint}</Text>:<></>}
+                {hidden[item.key-1]?<TouchableOpacity onPress={() => {setmodalopen(true); setCurr(item)}}>
                     <Text style= {[styles.buttons , {textAlign: 'center', color: '#c0c0c0'}]}>Reply</Text>
                 </TouchableOpacity>:<></>}
 
