@@ -128,7 +128,7 @@ export default function Feedback({navigation}){
         <FlatList
             data={FAQs}
             renderItem={({ item }) => (
-            <View style={{backgroundColor: '#841851', borderRadius: 15,paddingTop: 25,paddingBottom: 25,paddingVertical:15,borderBottomWidth:1.5,borderTopWidth:0,borderColor:'#14062E',paddingHorizontal:10}}>
+            <View style={{backgroundColor: '#841851', borderRadius: 15,paddingTop: 25,paddingBottom: 25,paddingVertical:15,borderBottomWidth:1.5,borderTopWidth:0,borderColor:'#14062E',paddingHorizontal:10, margin: 10, marginBottom: 0}}>
                 <View style = {{flex:1,flexDirection:'row'}} >
                     <Text style={[{fontSize:20,color:'white',flex:10}, {fontWeight:'normal'}]}>User{item.key}:  {item.user}</Text>  
                     <TouchableOpacity disabled={false} style={{flex:1}} onPress={()=>toggleAns(item.key)}>

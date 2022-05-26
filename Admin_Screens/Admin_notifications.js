@@ -76,11 +76,9 @@ export default function Admin_Notifications({navigation}){
             }
             const length3=data.Feedback.length;
             for(let i=0; i<length3; i++){
-                if(data.Feedback[i].user===auth().currentUser.email){
-                    temp3.push({key:i, question:data.Feedback[i].Question, answer:data.Feedback[i].Answer, type:'Feedback'});
-                    tAll.push({key:j, question:data.Feedback[i].Question, answer:data.Feedback[i].Answer, type:'Feedback'});
+                    temp3.push({key:i, question:data.Feedback[i].Question, answer:data.Feedback[i].Answer, type:'Feedback', user:data.Feedback[i].user});
+                    tAll.push({key:j, question:data.Feedback[i].Question, answer:data.Feedback[i].Answer, type:'Feedback', user:data.Feedback[i].user});
                     j++;
-                }
             }
         });
         setLoading(false);
@@ -101,8 +99,32 @@ export default function Admin_Notifications({navigation}){
         setOpen(false);
     }
 
-    function sendfeedback(){
+    async function sendfeedback(){
+        setLoading(true);
+        const subscriber=await firestore()
+        .collection('Admin').doc('Notifications').get().then(doc=>{
+            const data=doc.data();
 
+            if(type==='Promotions'){
+                const fd=data.Promotions;
+                fd.push(newnotes);
+
+                const userDocument=firestore().collection('Admin').doc('Notifications')
+                .update({
+                    Promotions:fd
+                }).then(setLoading(false));
+            }
+            else if(type==="Bank"){
+                const fd=data.notifications;
+                fd.push(newnotes);
+
+                const userDocument=firestore().collection('Admin').doc('Notifications')
+                .update({
+                    notifications:fd
+                }).then(setLoading(false));
+            }
+        });
+        setLoading(false);
     }
 
     function handlemodal(){
@@ -224,7 +246,7 @@ export default function Admin_Notifications({navigation}){
                             }else{
                                 return(
                                     <View style={[{ width:'100%',marginTop:10,borderRadius:15,paddingVertical:15,backgroundColor:'#841851',}, {width:'100%'}]}>
-                                        <Text style={[{fontSize:20,color:'silver'}, {fontWeight:'bold'}]}>You: {item.question}</Text>
+                                        <Text style={[{fontSize:20,color:'silver'}, {fontWeight:'bold'}]}>{item.user}: {item.question}</Text>
                                         <Text style={[{fontSize:20,color:'silver'}, {fontWeight:'normal'}]}>{item.answer}</Text>
                                     </View>
                                 );
