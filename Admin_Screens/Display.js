@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
@@ -22,24 +22,44 @@ import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Display({navigation}){
-
-    const [FAQs,setFAQs]=useState([
-        { user: 'Muhammad Huzaifa',email:'huzzaifaasim@gmail.com', cnic: '33102-4366174-5', status: 'Customer + Admin', amount: '0', key:'1'},
-        { user: 'Abdullah Irfan',email:'abdullahirfan2001@gmail.com',cnic: '33102-4366174-5',status: 'Customer', amount: '200,000', key:'2'},
-        { user: 'Aisha Irfan',email:'aishairfan1851@gmail.com', cnic: '33102-4366174-5', status: 'Customer', amount: '165,700', key:'3'},
-        { user: 'Muhammad Usman Shahid',email:'codesbyusman@gmail.com', cnic: '33102-4366174-5', status: 'Customer', amount: '5,000', key:'4'},
-        { user: 'Musab Imran',email:'musabimran@gmail.com', cnic: '33102-4366174-5', status: 'Customer', amount: '10,000', key:'5'},
-        { user: 'Ismail Ramzan',email:'ismailramzan0001@gmail.com', cnic: '33102-4366174-5', status: 'Customer', amount: '20,000', key:'6'},
-    ]);
-    const [hidden, setHidden]=useState([false, false, false, false, false, false, false, false, false]);
+    const [count, setCount]=useState(0);
+    const [FAQs,setFAQs]=useState([]);
+    const [hidden, setHidden]=useState([]);
 
     const [modalopen, setmodalopen] = useState(false);
 
-    function toggleAns(key){
-        let x=hidden.slice();
-        x[key-1]=!x[key-1];
-        setHidden(x);
+    async function getData(){
+      const temp=[];
+
+      const subscriber=await firestore().collection("AccountData")
+      .get()
+      .then(querySnapshot=>{
+        querySnapshot.forEach(documentSnapshot=>{
+          const u=documentSnapshot.data();
+          temp.push({email:documentSnapshot.id, data:u});
+        });
+        for(let i=0; i<temp.length; i++){
+          hidden.push(false);
+          temp[i]["key"]=i+1;
+          console.log(temp[i]["key"]);
+        }
+      });
+      
+      setFAQs(temp);
     }
+    
+    useEffect(()=>{
+      if(count===0){
+        getData();
+        setCount(1);
+      }
+    });
+
+    function toggleAns(key){
+      let x=hidden.slice();
+      x[key-1]=!x[key-1];
+      setHidden(x);
+  }
 
     function handlemodal(){
       setmodalopen(false);
@@ -95,15 +115,14 @@ export default function Display({navigation}){
             renderItem={({ item }) => (
             <View style={{paddingVertical:15,borderBottomWidth:1.5,borderTopWidth:0,borderColor:'#801818',paddingHorizontal:10}}>
                 <View style = {{flex:1,flexDirection:'row'}} >
-                    <Text style={[{fontSize:20,color:'white',flex:10}, {fontWeight:'normal'}]}>User{item.key}:  {item.user}</Text>  
+                    <Text style={[{fontSize:20,color:'white',flex:10}, {fontWeight:'normal'}]}>{item.email}</Text>  
                     <TouchableOpacity disabled={false} style={{flex:1}} onPress={()=>toggleAns(item.key)}>
                         <Text style={[{fontSize:25,fontWeight:'bold'}, {color:'#841851'}]}>{!hidden[item.key-1]?"\u{1F448}":"\u{1F447}"}</Text>
                     </TouchableOpacity>
                 </View>
-                {hidden[item.key-1]?<Text style={[{fontSize:20},{color:'#841851'}]}>Email: {item.email}</Text>:<></>}
-                {hidden[item.key-1]?<Text style={[{fontSize:20},{color:'#841851'}]}>Cnic: {item.cnic}</Text>:<></>}
-                {hidden[item.key-1]?<Text style={[{fontSize:20},{color:'#841851'}]}>Status: {item.status}</Text>:<></>}
-                {hidden[item.key-1]?<Text style={[{fontSize:20},{color:'#841851'}]}>Current Balance: {item.amount}. Rs</Text>:<></>}
+                {hidden[item.key-1]?<Text style={[{fontSize:20},{color:'#841851'}]}>Name: {item.data.Name}</Text>:<></>}
+                {hidden[item.key-1]?<Text style={[{fontSize:20},{color:'#841851'}]}>CNIC: {item.data.CNIC}</Text>:<></>}
+                {hidden[item.key-1]?<Text style={[{fontSize:20},{color:'#841851'}]}>Balance: Rs. {item.data.balance}</Text>:<></>}
 
             </View>        
             )}

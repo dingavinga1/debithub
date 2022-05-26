@@ -52,6 +52,7 @@ export default function Feedback({navigation}){
         const length=data.Feedback.length;
         for(let i=0; i<length; i++){
             temp.push(data.Feedback[i]);
+            temp[i]["key"]=i+1;
         }
     });
     setLoading(false);

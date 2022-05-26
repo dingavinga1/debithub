@@ -28,7 +28,7 @@ export default function Settings({navigation}){
 
     const [old, setold] = useState("");
 
-    const [newpass, setnewpass] = useState("");
+    const [pass, setPass] = useState("");
 
     const [modalopen, setmodalopen] = useState(false);
 
@@ -37,9 +37,16 @@ export default function Settings({navigation}){
     const [loading, setLoading]=useState(false);
 
 
-    function changePassword(){
-        
-    }
+    function resetPass(){
+      if(pass!==confirm){
+        alert("Passwords do not match");
+        return;
+      }
+
+      auth().currentUser.updatePassword(auth().currentUser.email, pass).then(()=>{
+          setError("Password changed successfully")
+      }).catch(err=>setError(err));
+  }
 
     function goback(){
       navigation.navigate('Dashboard');
@@ -110,7 +117,7 @@ export default function Settings({navigation}){
                     style={[styles.notification_input, {height: '14%', borderColor: '#841851'}]}
                     textAlignVertical="top"
                     placeholderTextColor={"#c0c0c0"}
-                    onChangeText={setnewpass}
+                    onChangeText={setPass}
                 ></TextInput>
                                     
                     <Text style = {{margin: 10, marginTop: 20, fontSize: 20, fontWeight: 'bold', color: '#841851'}}>Confirm New Password:</Text>
@@ -123,7 +130,7 @@ export default function Settings({navigation}){
                     onChangeText={setconfirm}
                 ></TextInput>
 
-                <TouchableOpacity onPress={() => {changePassword(); goback() ; Alert.alert('Password Reset Complete')}}>
+                <TouchableOpacity onPress={() => {resetPass();}}>
                     <Text style= {[styles.buttons , {textAlign: 'center', color: '#c0c0c0', marginTop: 20, backgroundColor:'#841851', color: '#c0c0c0', borderColor: '#c0c0c0', borderWidth: 2, paddingBottom: 3}]}>Change  <Icon name="arrow-left" size={20} color="#c0c0c0"/></Text>
                     
                 </TouchableOpacity>
