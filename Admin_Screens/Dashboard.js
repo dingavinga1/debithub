@@ -70,7 +70,7 @@ export default function Dashboard({navigation}) {
               <Text style ={{color: '#c0c0c0', fontSize: 20, fontWeight: 'bold', fontFamily: 'times new roman', marginLeft: 10, marginTop: 15, marginBottom: 10}}> <Icon name="users" size={25} color="#c0c0c0"/>  Display All Users</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => {navigation.navigate('Admin_Notifications'); handlemodal()}} style = {{ marginTop: 5 , backgroundColor: '#841851', borderBottomColor: 'maroon', borderWidth: 2, opacity: 0.7}}>
+            <TouchableOpacity onPress={() => {navigation.navigate('Admin Notifications'); handlemodal()}} style = {{ marginTop: 5 , backgroundColor: '#841851', borderBottomColor: 'maroon', borderWidth: 2, opacity: 0.7}}>
               <Text style ={{color: '#c0c0c0', fontSize: 20, fontWeight: 'bold', fontFamily: 'times new roman', marginLeft: 10, marginTop: 15, marginBottom: 10}}> <Icon name="bell" size={25} color="#c0c0c0"/>  Add Notificaions</Text>
             </TouchableOpacity>
 
@@ -82,7 +82,7 @@ export default function Dashboard({navigation}) {
               <Text style ={{color: '#c0c0c0', fontSize: 20, fontWeight: 'bold', fontFamily: 'times new roman', marginLeft: 10, marginTop: 15, marginBottom: 10}}> <Icon name="gears" size={25} color="#c0c0c0"/>  Change Password</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => {navigation.navigate('Admin_Statements'); handlemodal()}} style = {{ marginTop: 5 , backgroundColor: '#841851', borderBottomColor: 'maroon', borderWidth: 2, opacity: 0.7}}>
+            <TouchableOpacity onPress={() => {navigation.navigate('Admin Statements'); handlemodal()}} style = {{ marginTop: 5 , backgroundColor: '#841851', borderBottomColor: 'maroon', borderWidth: 2, opacity: 0.7}}>
               <Text style ={{color: '#c0c0c0', fontSize: 20, fontWeight: 'bold', fontFamily: 'times new roman', marginLeft: 10, marginTop: 15, marginBottom: 10}}> <Icon name="envelope-o" size={25} color="#c0c0c0" />  Check Statement</Text>
             </TouchableOpacity>
 
@@ -156,7 +156,7 @@ export default function Dashboard({navigation}) {
 
                           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 10}}>
                           
-                            <TouchableOpacity onPress={() => navigation.navigate('Admin_Notifications')}>
+                            <TouchableOpacity onPress={() => navigation.navigate('Admin Notifications')}>
                                 <Icon name="bell" size={40} color="#801818"/>
                             </TouchableOpacity>
                               <Text style={{color: 'white', textAlign: 'center',fontWeight: 'bold', fontSize: 15}}>Add Notifications</Text>
@@ -209,7 +209,7 @@ export default function Dashboard({navigation}) {
 
                 <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
                 
-                  <TouchableOpacity onPress={() => navigation.navigate("Admin_Statements")}>
+                  <TouchableOpacity onPress={() => navigation.navigate("Admin Statements")}>
                     <Icon name="envelope-o" size={30} color="#c0c0c0" style={{padding: 2, margin:2}}/>
                     {/*<Text style= {{textAlign: 'center', color: '#c0c0c0',  textAlign: 'center',fontSize: 15, fontWeight: 'bold'}}>History</Text>*/}
                   </TouchableOpacity>

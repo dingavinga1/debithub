@@ -208,7 +208,7 @@ export default function App(){
           backgroundColor:'#841851',
           }
           }} />
-        <Stack.Screen name = "Admin_Notifications" component={Admin_Notifications} options={{
+        <Stack.Screen name = "Admin Notifications" component={Admin_Notifications} options={{
            headerRight:(props)=>(
             <Image source={require('./assets/designing/logocard.png')}
               style={{width:120, height:35}}
@@ -256,7 +256,7 @@ export default function App(){
           backgroundColor:'#841851',}
         }} />
 
-      <Stack.Screen name = "Admin_Statements" component={Admin_Statements} options={{
+      <Stack.Screen name = "Admin Statements" component={Admin_Statements} options={{
            headerRight:(props)=>(
             <Image source={require('./assets/designing/logocard.png')}
               style={{width:120, height:35}}

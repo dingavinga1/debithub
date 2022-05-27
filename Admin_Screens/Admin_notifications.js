@@ -185,7 +185,7 @@ export default function Admin_Notifications({navigation}){
               <Text style ={{color: '#c0c0c0', fontSize: 20, fontWeight: 'bold', fontFamily: 'times new roman', marginLeft: 10, marginTop: 15, marginBottom: 10}}> <Icon name="gears" size={25} color="#c0c0c0"/>  Change Password</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => {navigation.navigate('Admin_Statements'); handle2modal()}} style = {{ marginTop: 5 , backgroundColor: '#841851', borderBottomColor: 'maroon', borderWidth: 2, opacity: 0.7}}>
+            <TouchableOpacity onPress={() => {navigation.navigate('Admin Statements'); handle2modal()}} style = {{ marginTop: 5 , backgroundColor: '#841851', borderBottomColor: 'maroon', borderWidth: 2, opacity: 0.7}}>
               <Text style ={{color: '#c0c0c0', fontSize: 20, fontWeight: 'bold', fontFamily: 'times new roman', marginLeft: 10, marginTop: 15, marginBottom: 10}}> <Icon name="envelope-o" size={25} color="#c0c0c0" />  Check Statement</Text>
             </TouchableOpacity>
 
@@ -222,7 +222,8 @@ export default function Admin_Notifications({navigation}){
                      <Text style= {[{textAlign: 'center', color: '#c0c0c0', backgroundColor: "#841851", borderColor: "#c0c0c0",borderWidth: 4, fontSize: 20, fontWeight: 'bold', borderRadius: 15, paddingTop:5}]}>ADD</Text> 
                      
                 </TouchableOpacity>
-
+                <TouchableOpacity onPress={() => handlemodal()}><Icon name="arrow-left" size={30} color="#c0c0c0" style = {{marginLeft: 160, marginRight: 160, marginTop: 100, marginBottom: 0}}/></TouchableOpacity>
+                <Text style = {{marginLeft: 160, marginRight: 160, color: 'white'}}>Close</Text>
 
             </View>
             </View>
@@ -245,7 +246,7 @@ export default function Admin_Notifications({navigation}){
                                 );
                             }else{
                                 return(
-                                    <View style={[{ width:'100%',marginTop:10,borderRadius:15,paddingVertical:15,backgroundColor:'#841851',}, {width:'100%'}]}>
+                                    <View style={[{ width:'100%',marginTop:10,borderRadius:15,paddingVertical:15,backgroundColor:'#841851', padding:10}, {width:'100%'}]}>
                                         <Text style={[{fontSize:20,color:'silver'}, {fontWeight:'bold'}]}>{item.user}: {item.question}</Text>
                                         <Text style={[{fontSize:20,color:'silver'}, {fontWeight:'normal'}]}>{item.answer}</Text>
                                     </View>
@@ -257,7 +258,7 @@ export default function Admin_Notifications({navigation}){
             </View>
             <Loader animating={loading} />
             <TouchableOpacity onPress={() => setmodalopen(true)} style = {{marginLeft: 170, position: 'absolute', right: 15, bottom: 124}}>
-                    <Icon name="plus" size={50} color="#c0c0c0" style ={styles.adder} />
+                    <Icon name="plus" size={50} color="#c0c0c0" style ={[styles.adder, {borderColor: '#c0c0c0', borderWidth: 2}]} />
                     </TouchableOpacity>
             <FloatingMenu
                 isOpen={open}
@@ -268,10 +269,11 @@ export default function Admin_Notifications({navigation}){
                 bottom={62}
                 backgroundUpColor={'#841851'}
                 primaryColor={'#fff'}
-                borderColor='transparent'
                 backgroundDownColor={'#841851'}
+                borderColor = {'#c0c0c0'}
                 buttonWidth={50}
-                innerWidth={50}
+                innerWidth={45}
+
             />
              <LinearGradient colors={['#14062E','#100010','#841851','#100010', '#14062E' ]}  start={{ x: 0, y: 0.5 }}
                 end={{ x: 1, y: 0.5 }} style={{flexDirection: 'row',borderColor:'#00008b',borderTopWidth:4,}}>
@@ -287,7 +289,7 @@ export default function Admin_Notifications({navigation}){
 
                 <View style={{flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
                 
-                  <TouchableOpacity onPress={() => navigation.navigate("Admin_Statements")}>
+                  <TouchableOpacity onPress={() => navigation.navigate("Admin Statements")}>
                     <Icon name="envelope-o" size={30} color="#c0c0c0" style={{padding: 2, margin:2}}/>
                     {/*<Text style= {{textAlign: 'center', color: '#c0c0c0',  textAlign: 'center',fontSize: 15, fontWeight: 'bold'}}>History</Text>*/}
                   </TouchableOpacity>
