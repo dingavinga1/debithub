@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function PayBills() {
+export default function Funds() {
     const [dark, setDark]=useState(false);
 
     useEffect(()=>{
@@ -23,7 +23,7 @@ export default function PayBills() {
         return stylesLight;
     }
     const [beneficiary, setBeneficiary] =useState(' ');
-    const [billID, setBillID]=useState(' ');
+    const [accountNo, setAccountNo]=useState(' ');
     const [amount, setAmount]=useState(' ');
     const [error, setError]=useState(' ');
     const [toggle, setToggle]=useState(false);
@@ -44,7 +44,7 @@ export default function PayBills() {
         <View style={{flex:1}}>
             <View style={[styles().top,{flex:1}]}></View>
             <View style={[styles().top,{flex:1}]}>
-                    <Text style={[styles().text, {fontWeight:'bold', fontSize:30}]}>BILL PAYMENT</Text>
+                    <Text style={[styles().text, {fontWeight:'bold', fontSize:30}]}>TRANSFER FUNDS</Text>
             </View>
             <View style={[styles().top,{flex:2}]}></View>
             <View style={[styles().top,{flex:10}]}>
@@ -52,7 +52,7 @@ export default function PayBills() {
                 <View style={styles().input}>
                     <View style = {{flex:1,flexDirection:'row'}} >
                     <Text style={[styles().text, {marginTop:5,flex:9,fontWeight:'normal',fontSize:14}]}>
-                        {beneficiary===' '?'Biller...':beneficiary}
+                        {beneficiary===' '?'Bank Name...':beneficiary}
                     </Text>  
                     <TouchableOpacity disabled={false} style={{flex:1}} onPress={()=>toggleAns()}>
                         <Text style={[{fontSize:25,fontWeight:'bold'}, dark?{color:'silver'}:{color:'#801818'}]}>{!hidden?"\u{25BC}":"\u{25B2}"}</Text>
@@ -61,19 +61,19 @@ export default function PayBills() {
                 </View>
                 {hidden?<View style={{marginLeft:75,width:'100%'}} >
                         <TouchableOpacity style={[styles().menu,{align:'left'}]} onPress={()=>setBeneficiary('Nayatel')} >
-                        <Text style={[{fontSize:14},dark?{color:'white'}:{color:'black'}]}>Nayatel</Text>
+                        <Text style={[{fontSize:14},dark?{color:'white'}:{color:'black'}]}>DebitHub</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={[styles().menu,{align:'left'}]} onPress={()=>setBeneficiary('IESCO')}>
-                        <Text style={[{fontSize:14},dark?{color:'white'}:{color:'black'}]}>IESCO</Text>
+                        <Text style={[{fontSize:14},dark?{color:'white'}:{color:'black'}]}>Habib Bank Limited</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={[styles().menu,{align:'left'}]} onPress={()=>setBeneficiary('PTCL')}>
-                        <Text style={[{fontSize:14},dark?{color:'white'}:{color:'black'}]}>PTCL</Text>
+                        <Text style={[{fontSize:14},dark?{color:'white'}:{color:'black'}]}>Meezan Bank</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={[styles().menu,{align:'left'}]} onPress={()=>setBeneficiary('Jazz')}>
-                        <Text style={[{fontSize:14},dark?{color:'white'}:{color:'black'}]}>Jazz</Text>
+                        <Text style={[{fontSize:14},dark?{color:'white'}:{color:'black'}]}>Bank Alfalah</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={[styles().menu]} onPress={()=>setBeneficiary('Ufone')}>
-                        <Text style={[{fontSize:14},dark?{color:'white'}:{color:'black'}]}>Ufone</Text>
+                        <Text style={[{fontSize:14},dark?{color:'white'}:{color:'black'}]}>Standard Chartered</Text>
                         </TouchableOpacity>
                         <TextInput
                             placeholder="Other..."
@@ -87,11 +87,11 @@ export default function PayBills() {
                     </View>:<></>}     
                
                 <TextInput
-                    placeholder="Bill ID..."
+                    placeholder="Account Number..."
                     style={styles().input}
                     textAlignVertical="top"
                     placeholderTextColor={dark?"white":"black"}
-                    onChangeText={setBillID}
+                    onChangeText={setAccountNo}
                 >
                 </TextInput>
                 <TextInput
@@ -164,7 +164,6 @@ const stylesDark=StyleSheet.create({
 
 const stylesLight=StyleSheet.create({
     top:{
-      
         alignItems:'center',
         flex:8,
         backgroundColor:'#d8cfc4',

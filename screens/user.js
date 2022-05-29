@@ -99,22 +99,22 @@ export default function User({navigation}){
             return(
                 <View style={{flex:1}}>
                 <TouchableOpacity 
-                    style={{flex:1}}
+                    style={{flex:1,alignItems:'center',justifyContent:'center'}}
                     onPress={handleDark}
                 >
-                    <Image source={dark?require('../assets/sun.png'):require('../assets/moon.png')} style={{height:60, width:60}}/>
+                    <Icon name={dark?"sun-o":"moon-o"} size={50} color={dark?"#c0c0c0":"#801818"} />
                 </TouchableOpacity>
                 <TouchableOpacity 
-                    style={{flex:1}}
+                    style={{flex:1,alignItems:'center',justifyContent:'center'}}
                     onPress={()=>setRst(true)}
                 >
-                    <Image source={require('../assets/crack.png')} style={{height:60, width:60}}/>
+                    <Icon name="unlock-alt" size={50} color={dark?"#c0c0c0":"#801818"} />
                 </TouchableOpacity>
                 <TouchableOpacity 
-                    style={{flex:1}}
+                    style={{flex:1,alignItems:'center',justifyContent:'center'}}
                     onPress={()=>setSetting(false)}
                 >
-                    <Image source={require('../assets/close.png')} style={{height:60, width:60}}/>
+                      <Icon name="window-close-o" size={50} color={dark?"#c0c0c0":"#801818"} />
                 </TouchableOpacity>
                 </View>
             );
@@ -124,7 +124,7 @@ export default function User({navigation}){
                 
                 <View style={{flex:1, justifyContent:'center', alignItems:'center', padding:10}}>
                     <View style={{flex:1}}>
-                        <Image source={require('../assets/crack.png')} style={{height:60, width:60}}/>
+                    <Icon name="unlock-alt" size={45} color={dark?"#c0c0c0":"#801818"} />
                     </View>
                         <Text style={[dark?{color:'silver'}:{color:"black"}, {fontSize:15, marginTop:10, fontWeight:'bold'}]}>New Password</Text>
                         <TextInput
@@ -164,7 +164,7 @@ export default function User({navigation}){
                     </ImageBackground>
                 </View>
                 <View style={styles().row}>
-                    <TouchableOpacity style={styles().btn}>
+                    <TouchableOpacity style={styles().btn} onPress={()=>{if(!loading)navigation.navigate('Funds')}}>
                         <Image source={require('../assets/mobile-payment.png')} style={{width:50,height:60, opacity:0.8}}/>
                         <Text style={[styles().text, {textAlign:'center', paddingTop:10}]}>Funds Transfer</Text>
                     </TouchableOpacity>
