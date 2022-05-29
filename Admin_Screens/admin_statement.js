@@ -31,17 +31,143 @@ export default function Admin_Statements({navigation}){
 
     const [modalopen, setmodalopen] = useState(false);
 
+    const [type, settype] = useState("");
+
+    const [newnotes, setnewnotes] = useState("");
+    const [modal2open, setmodal2open] = useState(false);
+
+    const [hidden, setHidden]=useState([false, false, false, false, false, false, false, false, false]);
+
+    function handle2modal(){
+      setmodal2open(false);
+    }
+
     function handlemodal(){
       setmodalopen(false);
     }
+    
+    function toggleAns(key){
+      let x=hidden.slice();
+      x[key-1]=!x[key-1];
+      setHidden(x);
+  }
 
-    function getstatement(){
+    const [received, setReceived] = useState([]);
+    const [sent, setSent] = useState([]);
+    const [exists, setExists]= useState(true);
 
+    async function getstatement(){
+      setExists(true);
+      const rc=[];
+      const st=[];
+      const subscriber=await firestore().collection("AccountData")
+      .get()
+      .then(querySnapshot=>{
+        querySnapshot.forEach(documentSnapshot=>{
+          const u=documentSnapshot.id;
+          if(u===email){
+            setExists(true);
+            const d=documentSnapshot.data();
+            if(d.Recieved!==undefined){
+              const length=d.Recieved.length;
+              for(let i=0; i<length; i++){
+                rc.push({key:i, data:d.Recieved[i], type:"Received"});
+                rc[i]["key"] = i+1;
+              }
+
+            }
+            if(d.Sent!==undefined){
+              const length=d.Sent.length;
+              for(let i=0; i<length; i++){
+                st.push({key:i, data:d.Sent[i], type:"Sent"});
+                st[i]["key"] = i+1;
+              }
+            }
+          }  
+        });
+      });
+      setReceived(rc);
+      setSent(st);
+      if(rc.length === 0 && st.length === 0){
+        setExists(false);
+      }
     }
+
+    function handleShit(){
+      if(exists){
+        return(
+          <View style={{flex:1}}>
+          <FlatList
+          data={received}
+          renderItem={({ item }) => (
+          <View style={{backgroundColor: '#841851', borderRadius: 15,paddingTop: 25,paddingBottom: 25,paddingVertical:15,borderBottomWidth:1.5,borderTopWidth:0,borderColor:'#14062E',paddingHorizontal:10, margin: 10, marginBottom: 0}}>
+              <View style = {{flex:1,flexDirection:'row'}} >
+                  <Text style={[{fontSize:20,color:'white', flex: 10}, {fontWeight:'bold'}]}>Recieved</Text>  
+                    
+                  <TouchableOpacity disabled={false} style={{flex:1}} onPress={()=>toggleAns(item.key)}>
+                      <Text style={[{fontSize:25,fontWeight:'bold'}, {color:'#000'}]}>{!hidden[item.key-1]?"\u{1F448}":"\u{1F447}"}</Text>                 
+                  </TouchableOpacity>
+              </View>
+              {hidden[item.key-1]?<Text style={[{fontSize:20}, {fontWeight:'bold', color: '#000'}]}>Name: {item.data.Name}</Text>:<></>}
+              {hidden[item.key-1]?<Text style={[{fontSize:20, fontWeight: 'bold'},{color:'#000'}]}>Account Number: {item.data["Account Number"]}</Text>:<></>}
+              {hidden[item.key-1]?<Text style ={[{fontSize:20, fontWeight: 'bold'},{color:'#000'}]}>Bank: {item.data.Bank}</Text>:<></>}
+              {hidden[item.key-1]?<Text style ={[{fontSize:20, fontWeight: 'bold'},{color:'#000'}]}>Date: {item.data.Date}</Text>:<></>}
+              {hidden[item.key-1]?<Text style ={[{fontSize:20, fontWeight: 'bold'},{color:'#000'}]}>Balance: {item.data.Money}</Text>:<></>}
+              
+
+          </View>        
+          )}
+      />
+
+      <FlatList
+          data={sent}
+          renderItem={({ item }) => (
+          <View style={{backgroundColor: '#841851', borderRadius: 15,paddingTop: 25,paddingBottom: 25,paddingVertical:15,borderBottomWidth:1.5,borderTopWidth:0,borderColor:'#14062E',paddingHorizontal:10, margin: 10, marginBottom: 0, marginTop: 0}}>
+              <View style = {{flex:1,flexDirection:'row'}} >
+                  <Text style={[{fontSize:20,color:'white', flex: 10}, {fontWeight:'bold'}]}>Sent</Text>  
+                    
+                  <TouchableOpacity disabled={false} style={{flex:1}} onPress={()=>toggleAns(item.key)}>
+                      <Text style={[{fontSize:25,fontWeight:'bold'}, {color:'#000'}]}>{!hidden[item.key-1]?"\u{1F448}":"\u{1F447}"}</Text>                 
+                  </TouchableOpacity>
+              </View>
+              {hidden[item.key-1]?<Text style={[{fontSize:20}, {fontWeight:'bold', color: '#000'}]}>Name: {item.data.Name}</Text>:<></>}
+              {hidden[item.key-1]?<Text style={[{fontSize:20, fontWeight: 'bold'},{color:'#000'}]}>Account Number: {item.data["Account Number"]}</Text>:<></>}
+              {hidden[item.key-1]?<Text style ={[{fontSize:20, fontWeight: 'bold'},{color:'#000'}]}>Bank: {item.data.Bank}</Text>:<></>}
+              {hidden[item.key-1]?<Text style ={[{fontSize:20, fontWeight: 'bold'},{color:'#000'}]}>Date: {item.data.Date}</Text>:<></>}
+              {hidden[item.key-1]?<Text style ={[{fontSize:20, fontWeight: 'bold'},{color:'#000'}]}>Balance: {item.data.Money}</Text>:<></>}
+              
+
+          </View>        
+          )}
+      />
+      </View>
+        );
+      }else{
+        return(
+          <View style={{flex:1, justifyContent: 'center'}}>
+            <Text style={{margin:10, color:'white', textAlign: 'center', backgroundColor: '#841851', padding: 20, fontSize: 20, fontWeight: 'bold', borderRadius: 10, }}>Sorry! No account statement found for this account.</Text>
+          </View>
+        );
+      }
+    }
+
+
     return(
     <LinearGradient colors={[ '#1e2127','#000','#1e2127']} style={{flex: 8, justifyContent: 'center'}}>
 
-<Modal visible = {modalopen} animationType = 'slide' transparent = {true}>
+
+<Modal visible = {modal2open} animationType = 'slide' transparent = {true}>
+            <View style= {{flex: 1,justifyContent: 'flex-end'}}>
+            <View style={{opacity: .88, backgroundColor: 'black', height: '100%',}}>  
+            {handleShit()}
+                <TouchableOpacity onPress={() => handle2modal()}><Icon name="arrow-left" size={30} color="#c0c0c0" style = {{marginLeft: 160, marginRight: 160, marginTop: 100, marginBottom: 0}}/></TouchableOpacity>
+                <Text style = {{marginLeft: 160, marginRight: 160, color: 'white', marginBottom: 15}}>Close</Text>
+
+            </View>
+            </View>
+            </Modal>
+
+      <Modal visible = {modalopen} animationType = 'slide' transparent = {true}>
             <View style= {{flex: 1,justifyContent: 'flex-end'}}>
             <View style={{opacity: .88, backgroundColor: 'black', height: '100%' }}>
                 
@@ -82,18 +208,18 @@ export default function Admin_Statements({navigation}){
 
             </View>
             </View>
-            </Modal>
+      </Modal>
 
        <View style={{flex: 1, justifyContent: 'center'}}>
        <Text style = {{margin: 10, marginTop: 20, fontSize: 20, fontWeight: 'bold', color: '#841851'}}>Enter Email:</Text>
        <TextInput
                     placeholder="Email Address..."
-                    style={[styles.notification_input, {height: '10%'}]}
+                    style={[styles.notification_input, {height: '14%'}]}
                     textAlignVertical="top"
                     placeholderTextColor={"#c0c0c0"}
                     onChangeText={setemail}
                 ></TextInput>
-                <TouchableOpacity onPress={() => getstatement()}>
+                <TouchableOpacity onPress={() => {getstatement() ; setmodal2open(true)}}>
                     <Text style= {[styles.buttons , {textAlign: 'center', color: '#c0c0c0', marginTop: 20, backgroundColor:'#841851', color: '#c0c0c0', borderColor: '#c0c0c0', borderWidth: 2, paddingBottom: 3}]}>Get Statement</Text>
                 </TouchableOpacity>
         </View>
