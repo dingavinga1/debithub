@@ -168,7 +168,7 @@ export default function User({navigation}){
                         <Image source={require('../assets/mobile-payment.png')} style={{width:50,height:60, opacity:0.8}}/>
                         <Text style={[styles().text, {textAlign:'center', paddingTop:10}]}>Funds Transfer</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles().btn}>
+                    <TouchableOpacity style={styles().btn} onPress={()=>{if(!loading)navigation.navigate('Bill')}}>
                         <Image source={require('../assets/bill.png')} style={{width:50,height:60, opacity:0.8}}/>
                         <Text style={[styles().text, {textAlign:'center', paddingTop:10}]}>Pay Bills</Text>
                     </TouchableOpacity>

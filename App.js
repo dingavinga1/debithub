@@ -11,6 +11,7 @@ import User from './screens/user';
 import Faq from './screens/faq';
 import Contact from './screens/contact';
 import Notifications from './screens/notifications';
+import Bill from './screens/bill.js';
 import Statement from './screens/statement';
 import Dashboard from './Admin_Screens/Dashboard';
 import Admin_Notifications from './Admin_Screens/Admin_notifications';
@@ -109,6 +110,31 @@ export default function App(){
 
 
         <Stack.Screen name="ContactUs" component={Contact}  options={dark?{
+          headerRight:(props)=>(
+            <Image source={require('./assets/designing/logocard.png')}
+              style={{width:120, height:35}}
+            />
+          ),
+          headerTitleAlign:'left',
+          headerTintColor: '#fff',
+          headerStyle:{
+            //elevation:2,
+          backgroundColor:'#841851',
+          }
+        }:{
+          headerRight:(props)=>(
+            <Image source={require('./assets/designing/logocard.png')}
+              style={{width:120, height:35}}
+            />
+          ),
+          headerTitleAlign:'left',
+          headerTintColor: '#fff',
+          headerStyle:{
+          backgroundColor:'#801818',
+          }
+        }}/>
+      
+        <Stack.Screen name="Bill" component={Bill}  options={dark?{
           headerRight:(props)=>(
             <Image source={require('./assets/designing/logocard.png')}
               style={{width:120, height:35}}

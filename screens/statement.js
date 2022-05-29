@@ -52,8 +52,8 @@ export default function Statement() {
             }
             const length2=data.Recieved.length;
             for(let i=0; i<length2; i++){
-                temp2.push({key:i, data:data.Recieved[i], type:'Recieved'});
-                tAll.push({key:j, data:data.Recieved[i], type:'Recieved'});
+                temp2.push({key:i, data:data.Recieved[i], type:'Received'});
+                tAll.push({key:j, data:data.Recieved[i], type:'Received'});
                 j++;
             }
         });
@@ -105,8 +105,11 @@ export default function Statement() {
                             {
                                     return(
                                         <View style={[styles().item, {width:'100%'}]}>
-                                            <Text style={[styles().text, {fontWeight:'bold'}]}>{item.data.Bank} Bank:{item.data["Account Number"]}</Text>
-                                            <Text style={[styles().text, {fontWeight:'normal'}]}>{item.data.Money}</Text>
+                                            <Text style={[styles().text, {fontWeight:'bold',textAlign:'right'}]}>{item.data.Date}</Text>
+                                            <Text style={[styles().text]}>{item.data.Bank}{'\n'}{item.data["Account Number"]}</Text>
+                                            <Text style={[styles().text, {fontWeight:'normal'}]}>Rs.{item.data.Money}</Text>
+                                            <Text style={[styles().text, {fontWeight:'bold',textAlign:'right'}]}>{item.type}</Text>
+                                                                                     
                                         </View>
                                     );
                             }
