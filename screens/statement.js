@@ -60,7 +60,7 @@ export default function Statement() {
         setLoading(false);
         setSent(temp);
         setRecieved(temp2);
-        console.log(recieved);
+       // console.log(recieved);
         setAll(tAll);
     }
 

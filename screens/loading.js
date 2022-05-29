@@ -28,7 +28,7 @@ export default function Loader(props){
 
     if(props.animating){
         return(
-            <View style={[{position:'absolute', width:100, height:40, borderRadius:50, elevated:10, overflow:'hidden', elevation:10, zIndex:1000}]}>
+            <View style={[{position:'absolute', top:'40%',left:'38%', right:'50%', width:100, height:40, borderRadius:50, elevated:10, overflow:'hidden', elevation:10, zIndex:1000}]}>
             <AnimatedLinearGradient 
                 customColors={presetColors.instagram}
                 speed={7000}

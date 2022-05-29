@@ -1,7 +1,11 @@
-import { Text, View, FlatList, StyleSheet, TouchableOpacity, TextInput,KeyboardAvoidingView } from 'react-native'
+import { Modal,Text, View, FlatList, StyleSheet, TouchableOpacity, TextInput,KeyboardAvoidingView } from 'react-native'
 import React, {useState, useEffect} from 'react'
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
+import Loader from './loading';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function Funds() {
     const [dark, setDark]=useState(false);
@@ -28,11 +32,118 @@ export default function Funds() {
     const [error, setError]=useState(' ');
     const [toggle, setToggle]=useState(false);
     const [hidden, setHidden]=useState(false);
+    const [loading, setLoading]=useState(false);
+
+    const [modal, setModal]=useState(false);
+
+    async function transferFunds(){
+        if(beneficiary===" "||accountNo===" "||amount===" "){
+            setError("Invalid Details");
+            setModal(true);
+            return;
+        }
+        setLoading(true);
+        let myname;
+        const subscriber=await firestore().collection("AccountData").doc(auth().currentUser.email).get()
+        .then(doc=>{
+            const data=doc.data();
+            if(data.balance-amount<0){
+                setError("Insufficient Balance");
+                setModal(true);
+                return;
+            }
+            const sent=[];
+            if(data.Sent!==undefined){
+                const length=data.Sent.length;
+                for(let i=0; i<length; i++){
+                    sent.push(data.Sent[i]);
+                }
+            }
+            const month=new Date().getMonth()+1;
+            const date=new Date().getDate();
+            const year=new Date().getFullYear();
+            let str=date+"/"+month+"/"+year;
+            myname=data.Name;
+            const obj={
+                Bank:beneficiary,
+                Money:parseInt(amount),
+                Date:str
+            }
+            obj["Account Number"]=accountNo;
+            sent.push(obj);
+            const balance=data.balance-amount;
+            const userDoc=firestore().collection("AccountData").doc(auth().currentUser.email).update({
+                balance:balance,
+                Sent:sent
+            }).then(setError("Transaction Successful"));
+        });
+
+        if(beneficiary==="DebitHub"){
+            const subscriber=firestore().collection("AccountData").doc(accountNo).get().then(doc=>{
+                if(doc!==undefined){
+                    const data=doc.data();
+                    const recieved=[];
+                    if(data.Recieved!==undefined){
+                        const length=data.Recieved.length;
+                        for(let i=0; i<length; i++){
+                            recieved.push(data.Recieved[i]);
+                        }
+                    }
+                    const month=new Date().getMonth()+1;
+                    const date=new Date().getDate();
+                    const year=new Date().getFullYear();
+                    let str=date+"/"+month+"/"+year;
+                    const obj={
+                        Bank:beneficiary,
+                        Money:parseInt(amount),
+                        Name:myname,
+                        Date:str
+                    }
+                    obj["Account Number"]=auth().currentUser.email;
+                    recieved.push(obj);
+                    const balance=parseInt(data.balance)+parseInt(amount);
+                    const userDoc=firestore().collection("AccountData").doc(accountNo).update({
+                        Recieved:recieved,
+                        balance:balance
+                    }).then(setError("Transaction Successful"));
+                }
+            });
+
+        }
+        setLoading(false);
+        setModal(true);
+    }
 
     function toggleAns(){
         let x=hidden;
         x=!x;
         setHidden(x);
+    }
+
+    function errorModal(){
+        if(error==='Transaction Successful'){
+            return(
+                <View style={{justifyContent:'center', alignItems:'center'}}>
+                    <Icon name="check" size={40} color={dark?'#841851':"#801818"}/>
+                    <Text style={[dark?{color:"silver"}:{color:'#801818'}, {fontWeight:'bold', fontSize:20, margin:15, marginBottom:20}]}>{error}</Text>
+                    <TouchableOpacity style={[styles().btn, {marginTop:0}]} onPress={()=>setModal(false)}>
+                        <Text style={[{color:'white', fontWeight:'bold'}]}>Ok</Text>
+                    </TouchableOpacity>
+                </View>
+            );
+        }
+        else{
+            return(
+                <View style={{justifyContent:'center', alignItems:'center'}}>
+                    <Icon name="close" size={40} color={dark?'#841851':"#801818"}/>
+                    <Text style={[dark?{color:'silver'}:{color:'#801818'}, {fontWeight:'bold', fontSize:20, margin:15, marginBottom:20}]}>{error}</Text>
+
+                    <TouchableOpacity style={[styles().btn, {marginTop:0}]} onPress={()=>setModal(false)}>
+                        <Text style={[{color:'white', fontWeight:'bold'}]}>Ok</Text>
+                    </TouchableOpacity>
+                </View>
+            );
+        }
     }
    
     return (
@@ -42,6 +153,18 @@ export default function Funds() {
             keyboardVerticalOffset={10}
         >
         <View style={{flex:1}}>
+        <Modal
+            animationType={"slide"}
+            transparent={true}
+            visible={modal}
+            onRequestClose={()=>setModal(false)}
+        >
+            <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+                <View style={[styles().setting]}>
+                    {errorModal()}
+                </View>
+            </View>
+        </Modal>
             <View style={[styles().top,{flex:1}]}></View>
             <View style={[styles().top,{flex:1}]}>
                     <Text style={[styles().text, {fontWeight:'bold', fontSize:30}]}>TRANSFER FUNDS</Text>
@@ -60,19 +183,19 @@ export default function Funds() {
                     </View> 
                 </View>
                 {hidden?<View style={{marginLeft:75,width:'100%'}} >
-                        <TouchableOpacity style={[styles().menu,{align:'left'}]} onPress={()=>setBeneficiary('Nayatel')} >
+                        <TouchableOpacity style={[styles().menu,{align:'left'}]} onPress={()=>setBeneficiary('DebitHub')} >
                         <Text style={[{fontSize:14},dark?{color:'white'}:{color:'black'}]}>DebitHub</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles().menu,{align:'left'}]} onPress={()=>setBeneficiary('IESCO')}>
+                        <TouchableOpacity style={[styles().menu,{align:'left'}]} onPress={()=>setBeneficiary('HBL')}>
                         <Text style={[{fontSize:14},dark?{color:'white'}:{color:'black'}]}>Habib Bank Limited</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles().menu,{align:'left'}]} onPress={()=>setBeneficiary('PTCL')}>
+                        <TouchableOpacity style={[styles().menu,{align:'left'}]} onPress={()=>setBeneficiary('Meezan Bank')}>
                         <Text style={[{fontSize:14},dark?{color:'white'}:{color:'black'}]}>Meezan Bank</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles().menu,{align:'left'}]} onPress={()=>setBeneficiary('Jazz')}>
+                        <TouchableOpacity style={[styles().menu,{align:'left'}]} onPress={()=>setBeneficiary('Bank Alfalah')}>
                         <Text style={[{fontSize:14},dark?{color:'white'}:{color:'black'}]}>Bank Alfalah</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles().menu]} onPress={()=>setBeneficiary('Ufone')}>
+                        <TouchableOpacity style={[styles().menu]} onPress={()=>setBeneficiary('Standard Chartered')}>
                         <Text style={[{fontSize:14},dark?{color:'white'}:{color:'black'}]}>Standard Chartered</Text>
                         </TouchableOpacity>
                         <TextInput
@@ -104,12 +227,13 @@ export default function Funds() {
                 </TextInput>
                 <TouchableOpacity
                     //if billID is valid && amount is enough
-                    //onPress={sendFeedback}
+                    onPress={transferFunds}
                     style={styles().btn}
                 >
                     <Text style={[styles().text, {fontWeight:'bold', fontSize:18}, !dark?{color:'white'}:{}]}>Proceed</Text>
                 </TouchableOpacity>
             </View>
+            <Loader animating={loading}/>
         </View>
         </KeyboardAvoidingView>
     )
@@ -159,6 +283,20 @@ const stylesDark=StyleSheet.create({
         width:'40%',
         padding:10,
         marginTop:40
+    },
+    setting:{
+        //borderColor:'#801818',
+        //borderWidth:2,
+        borderRadius:15,
+        backgroundColor:'#21252bf5',
+        height:'25%', 
+        width:'70%', 
+        //opacity:0.95,
+        justifyContent:'center',
+        alignItems:'center',
+        paddingTop:20,
+        borderWidth:3,
+        borderColor:'#841851'
     }
 });
 
@@ -201,5 +339,19 @@ const stylesLight=StyleSheet.create({
         width:'40%',
         padding:10,
         marginTop:40
+    },
+    setting:{
+        //borderColor:'#801818',
+        //borderWidth:2,
+        borderRadius:15,
+        backgroundColor:'#A79292f5',
+        height:'25%', 
+        width:'70%', 
+        //opacity:0.95,
+        justifyContent:'center',
+        alignItems:'center',
+        paddingTop:20,
+        borderWidth:3,
+        borderColor:'#801818'
     }
 });
