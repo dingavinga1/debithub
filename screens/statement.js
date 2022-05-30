@@ -43,18 +43,23 @@ export default function Statement() {
         const subscriber=await firestore()
         .collection('AccountData').doc(auth().currentUser.email).get().then(doc=>{
             const data=doc.data();
-            const length=data.Sent.length;
-            let j=0;
-            for(let i=0; i<length; i++){
-                temp.push({key:i, data:data.Sent[i], type:'Sent'});
-                tAll.push({key:j, data:data.Sent[i], type:'Sent'});
-                j++;
+            var j=0;
+            if(data.Sent!==undefined){
+                const length=data.Sent.length
+                for(let i=0; i<length; i++){
+                    temp.push({key:i, data:data.Sent[i], type:'Sent'});
+                    tAll.push({key:j, data:data.Sent[i], type:'Sent'});
+                    j++;
+                }
             }
-            const length2=data.Recieved.length;
-            for(let i=0; i<length2; i++){
-                temp2.push({key:i, data:data.Recieved[i], type:'Received'});
-                tAll.push({key:j, data:data.Recieved[i], type:'Received'});
-                j++;
+            if(data.Recieved!==undefined){
+                const length2=data.Recieved.length;
+
+                for(let i=0; i<length2; i++){
+                    temp2.push({key:i, data:data.Recieved[i], type:'Received'});
+                    tAll.push({key:j, data:data.Recieved[i], type:'Received'});
+                    j++;
+                }
             }
         });
         setLoading(false);
