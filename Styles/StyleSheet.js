@@ -1,27 +1,34 @@
+// Importing components from react native
 import React from 'react-native';
 import {StyleSheet} from 'react-native';
 
+// creating stylesheet for features styles
 export const styles=StyleSheet.create ({
+  // styles for container
     container: {
       flex:1,
       backgroundColor: '#8432df',
       justifyContent: 'center',
       textAlign: 'center',
     },
+    // styles for 2nd container
     container2: {
       flex: 1,
       justifyContent: 'center',
     },
+    //styles for touchables
     Touchables:{
       backgroundColor: 'transparent',
       marginLeft:120,
       marginRight: 120,
       borderRadius: 20,
     },
+    //styles for logo of app
     logo: {
         width: 150,
         height: 150,
     },
+    //styles for card or logo
     card: {
       height: 200 ,
       width: 300,
@@ -31,10 +38,12 @@ export const styles=StyleSheet.create ({
       borderWidth: 2,
       borderColor: '#7393B3'
     },
+    //styles for graph/ line chart
     graph:{
         marginLeft: 35,
         marginRight: 35,
     },
+    //styles for bottom of icons or modals
     bottom:{
       flex:1,
       flexDirection:'row',
@@ -44,6 +53,7 @@ export const styles=StyleSheet.create ({
       justifyContent:'space-between',
       alignItems:'center',
   },
+  //styles for input style
     input: {
        padding: 8,
         margin: 10,
@@ -55,6 +65,7 @@ export const styles=StyleSheet.create ({
         borderColor: 'transparent',
         borderBottomColor: '#fff',
     },
+    //styles for input of notifications
     notification_input:{
       width:'80%',
       height:'40%',
@@ -71,6 +82,7 @@ export const styles=StyleSheet.create ({
       fontSize: 17,
       padding:15,
   },
+  //styles for multi line inputs
     multilineinput: {
       padding: 8,
       margin: 10,
@@ -85,6 +97,7 @@ export const styles=StyleSheet.create ({
       borderColor: '#fff',
       fontWeight: 'bold'
    },
+   //styles for text input styles
     textinputstyles: {
       fontSize: 18,
       marginLeft: 10,
@@ -96,6 +109,7 @@ export const styles=StyleSheet.create ({
       borderColor: 'transparent',
       borderBottomColor: '#fff' 
     },
+    //styles for pickerstyle
     pickerstyle: { 
       color: 'white',
       marginLeft: 20,
@@ -108,6 +122,7 @@ export const styles=StyleSheet.create ({
       borderWidth: 2,
       borderBottomColor: 'white'
     },
+    //styles for deny inputs
     denyinputs: {
       padding: 2,
       margin: 30,
@@ -119,6 +134,7 @@ export const styles=StyleSheet.create ({
       borderColor: 'transparent',
       borderBottomColor: '#fff',
     },
+    //styles for header
     header:{
       textAlign: 'center',
       fontWeight: 'bold',
@@ -127,6 +143,7 @@ export const styles=StyleSheet.create ({
       justifyContent: 'center',
       fontFamily: 'times new roman'
     },
+    //styles for buttons
     buttons: {
       backgroundColor: 'black',
       borderWidth: 3,
@@ -143,6 +160,7 @@ export const styles=StyleSheet.create ({
       color: '#c0c0c0',
       fontFamily: 'times new roman',
     },
+    //styles for adder
     adder: {
       backgroundColor: '#841851',
       width: 50,
@@ -161,6 +179,7 @@ export const styles=StyleSheet.create ({
       color: '#c0c0c0',
       fontFamily: 'times new roman',
     },
+    //styles for icons
     icons:{
       paddingTop: 15,
       color: 'white',
